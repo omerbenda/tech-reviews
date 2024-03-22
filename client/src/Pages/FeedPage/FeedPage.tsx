@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import Post from '../../Common/Types/Post/Post';
 import User from '../../Common/Types/User/User';
-import PostCard from './Components/PostCard/PostCard';
+import PostCard from '../../Common/Components/PostCard/PostCard';
 
 const users: User[] = [
   {
@@ -46,7 +46,7 @@ const FeedPage = () => {
           alignItems="center"
           width="100%"
           height="100%"
-          gap="20%"
+          gap="10%"
         >
           {data.map((post: Post) => (
             <PostCard post={post} />
