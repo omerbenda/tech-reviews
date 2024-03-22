@@ -1,6 +1,13 @@
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleTitleClick = () => {
+    navigate('/');
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{ m: 0 }}>
@@ -9,6 +16,7 @@ const Navbar = () => {
             variant="h6"
             color="inherit"
             noWrap
+            onClick={handleTitleClick}
             sx={{ cursor: 'pointer', userSelect: 'none' }}
           >
             Tech Reviews
