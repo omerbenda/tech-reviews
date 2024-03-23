@@ -6,7 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <Box height="100%">
+    <Box display="flex" flexDirection="column" height="100%">
       <Navbar />
       <Box
         display="flex"
