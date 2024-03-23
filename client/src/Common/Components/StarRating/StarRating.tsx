@@ -1,6 +1,18 @@
 import { Star } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
+const STAR_COUNT = 5;
+
+const createStars: (rating: number) => JSX.Element[] = (rating: number) => {
+  const stars: JSX.Element[] = [];
+
+  for (let iter = 0; iter < STAR_COUNT; iter++) {
+    stars.push(<Star sx={{ color: rating > iter ? 'gold' : 'black' }} />);
+  }
+
+  return stars;
+};
+
 type Props = {
   rating: number;
 };
@@ -8,11 +20,7 @@ type Props = {
 const StarRating = ({ rating }: Props) => {
   return (
     <Box display="flex" gap={1}>
-      <Star sx={{ color: rating >= 1 ? 'gold' : 'black' }} />
-      <Star sx={{ color: rating >= 2 ? 'gold' : 'black' }} />
-      <Star sx={{ color: rating >= 3 ? 'gold' : 'black' }} />
-      <Star sx={{ color: rating >= 4 ? 'gold' : 'black' }} />
-      <Star sx={{ color: rating >= 5 ? 'gold' : 'black' }} />
+      {createStars(rating)}
     </Box>
   );
 };

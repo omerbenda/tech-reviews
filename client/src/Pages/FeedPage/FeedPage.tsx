@@ -33,7 +33,7 @@ const data: Post[] = [
   {
     id: '1',
     author: users[0],
-    content: { title: 'another product', body: 'yes', reviewerRating: 3.5 },
+    content: { title: 'another product', body: 'yes', reviewerRating: 3 },
   },
   {
     id: '2',
