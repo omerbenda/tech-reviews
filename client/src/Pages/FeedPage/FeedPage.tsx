@@ -3,6 +3,7 @@ import Navbar from '../../Common/Components/Navbar/Navbar';
 import Post from '../../Common/Types/Post/Post';
 import User from '../../Common/Types/User/User';
 import PostList from '../../Common/Components/PostList/PostList';
+import Sidebar from './Components/Sidebar/Sidebar';
 
 const users: User[] = [
   {
@@ -61,15 +62,7 @@ const FeedPage = () => {
     <Box display="flex" flexDirection="column" height="100%">
       <Navbar />
       <Box display="flex" flexDirection="row" overflow="hidden" gap="10px" height="100%">
-        <Box
-          display="flex"
-          flexDirection="column"
-          width="10%"
-          height="100%"
-          sx={{ overflowY: 'auto' }}
-        >
-          sidebar
-        </Box>
+        <Sidebar users={users} />
         <Divider orientation="vertical" />
         <PostList posts={data} />
       </Box>
