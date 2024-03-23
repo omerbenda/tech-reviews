@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import Post from '../../Types/Post/Post';
 import { Favorite } from '@mui/icons-material';
+import StarRating from '../StarRating/StarRating';
 
 type Props = {
   post: Post;
@@ -35,6 +36,8 @@ const PostCard = ({ post }: Props) => {
           <IconButton aria-label="like">
             <Favorite />
           </IconButton>
+          <Box display="flex" flexGrow="1" />
+          <StarRating rating={post.content.reviewerRating} />
         </CardActions>
       </Card>
     </Box>

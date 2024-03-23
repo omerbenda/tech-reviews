@@ -61,7 +61,13 @@ const FeedPage = () => {
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Navbar />
-      <Box display="flex" flexDirection="row" overflow="hidden" gap="10px" height="100%">
+      <Box
+        display="flex"
+        flexDirection="row"
+        overflow="hidden"
+        gap="10px"
+        height="100%"
+      >
         <Sidebar users={users} />
         <Divider orientation="vertical" />
         <PostList posts={data} />
