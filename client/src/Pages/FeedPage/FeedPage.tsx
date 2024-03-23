@@ -1,8 +1,8 @@
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import Post from '../../Common/Types/Post/Post';
 import User from '../../Common/Types/User/User';
-import PostCard from '../../Common/Components/PostCard/PostCard';
+import PostList from '../../Common/Components/PostList/PostList';
 
 const users: User[] = [
   {
@@ -13,45 +13,64 @@ const users: User[] = [
     id: '1',
     username: 'dev',
   },
+  {
+    id: '2',
+    username: 'last',
+  },
 ];
 
 const data: Post[] = [
   {
     id: '0',
     author: users[0],
-    content: { title: 'interseting product', body: 'this is very interseting' },
+    content: {
+      title: 'interseting product',
+      body: 'this is very interseting',
+      reviewerRating: 5,
+    },
   },
   {
     id: '1',
     author: users[0],
-    content: { title: 'another product', body: 'yes' },
+    content: { title: 'another product', body: 'yes', reviewerRating: 3.5 },
+  },
+  {
+    id: '2',
+    author: users[1],
+    content: { title: 'new product', body: 'no', reviewerRating: 0 },
+  },
+  {
+    id: '2',
+    author: users[1],
+    content: { title: 'new product', body: 'no', reviewerRating: 0 },
+  },
+  {
+    id: '2',
+    author: users[1],
+    content: { title: 'new product', body: 'no', reviewerRating: 0 },
+  },
+  {
+    id: '2',
+    author: users[2],
+    content: { title: 'last', body: 'no', reviewerRating: 0 },
   },
 ];
 
 const FeedPage = () => {
   return (
-    <Box height="100%">
+    <Box display="flex" flexDirection="column" height="100%">
       <Navbar />
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        height="100%"
-        sx={{ overflowY: 'auto' }}
-      >
-        <Box minHeight="5px" height="5%" />
+      <Box display="flex" flexDirection="row" overflow="hidden" gap="10px">
         <Box
           display="flex"
           flexDirection="column"
-          alignItems="center"
-          width="100%"
           height="100%"
-          gap="10%"
+          sx={{ overflowY: 'auto' }}
         >
-          {data.map((post: Post) => (
-            <PostCard post={post} />
-          ))}
+          sidebar
         </Box>
+        <Divider orientation="vertical" />
+        <PostList posts={data} />
       </Box>
     </Box>
   );

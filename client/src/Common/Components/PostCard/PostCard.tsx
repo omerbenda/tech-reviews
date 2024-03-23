@@ -17,27 +17,27 @@ type Props = {
 
 const PostCard = ({ post }: Props) => {
   return (
-    <Card elevation={6} sx={{ width: { xs: '75%', md: '35%', xl: '25%' } }}>
-      <CardHeader
-        avatar={<Avatar src={post.author.imageUrl} />}
-        title={<Typography variant="h6">{post.author.username}</Typography>}
-      />
-      <CardContent>
-        <Box display="flex" flexDirection="column" key={post.id}>
+    <Box display="flex">
+      <Card elevation={6} sx={{ width: { xs: '75%', md: '35%', xl: '25%' } }}>
+        <CardHeader
+          avatar={<Avatar src={post.author.imageUrl} />}
+          title={<Typography variant="h6">{post.author.username}</Typography>}
+        />
+        <CardContent>
           <Typography variant="h5" textAlign="center">
             {post.content.title}
           </Typography>
           <Typography variant="h6" textAlign="center">
             {post.content.body}
           </Typography>
-        </Box>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="like">
-          <Favorite />
-        </IconButton>
-      </CardActions>
-    </Card>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="like">
+            <Favorite />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </Box>
   );
 };
 
