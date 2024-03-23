@@ -64,6 +64,7 @@ const FeedPage = () => {
         <Box
           display="flex"
           flexDirection="column"
+          width="10%"
           height="100%"
           sx={{ overflowY: 'auto' }}
         >

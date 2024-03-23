@@ -17,7 +17,7 @@ type Props = {
 
 const PostCard = ({ post }: Props) => {
   return (
-    <Box display="flex">
+    <Box display="flex" justifyContent="center" p={1}>
       <Card elevation={6} sx={{ width: { xs: '75%', md: '35%', xl: '25%' } }}>
         <CardHeader
           avatar={<Avatar src={post.author.imageUrl} />}
