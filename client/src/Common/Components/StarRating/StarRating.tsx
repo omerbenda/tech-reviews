@@ -7,7 +7,7 @@ const createStars: (rating: number) => JSX.Element[] = (rating: number) => {
   const stars: JSX.Element[] = [];
 
   for (let iter = 0; iter < STAR_COUNT; iter++) {
-    stars.push(<Star sx={{ color: rating > iter ? 'gold' : 'black' }} />);
+    stars.push(<Star sx={{ color: rating > iter ? 'gold' : '#b0b0b0' }} />);
   }
 
   return stars;

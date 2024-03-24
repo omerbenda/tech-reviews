@@ -6,6 +6,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CardMedia,
   Collapse,
   Divider,
   IconButton,
@@ -30,6 +31,13 @@ const PostCard = ({ post }: Props) => {
           avatar={<Avatar src={post.author.imageUrl} />}
           title={<Typography variant="h6">{post.author.username}</Typography>}
         />
+        {post.content.imageUrl && (
+          <CardMedia
+            component="img"
+            image={post.content.imageUrl}
+            alt={post.content.title}
+          />
+        )}
         <Divider sx={{ mx: 2 }} />
         <CardActions disableSpacing>
           <IconButton aria-label="like">
@@ -40,8 +48,20 @@ const PostCard = ({ post }: Props) => {
         </CardActions>
         <Divider sx={{ mx: 2 }} />
         <CardContent>
-          <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
-            <Typography variant="body1" fontWeight="600" textAlign="center" overflow="hidden" textOverflow="ellipsis" width="90%">
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            gap={2}
+          >
+            <Typography
+              variant="body1"
+              fontWeight="600"
+              textAlign="center"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              width="90%"
+            >
               {post.content.title}
             </Typography>
             <Button
@@ -57,7 +77,12 @@ const PostCard = ({ post }: Props) => {
         <Collapse in={isExpanded} timeout="auto" unmountOnExit>
           <Divider sx={{ mx: 2 }} />
           <CardContent>
-            <Typography variant="body2" textAlign="center" overflow="hidden" textOverflow="ellipsis">
+            <Typography
+              variant="body2"
+              textAlign="center"
+              overflow="hidden"
+              textOverflow="ellipsis"
+            >
               {post.content.body}
             </Typography>
           </CardContent>
