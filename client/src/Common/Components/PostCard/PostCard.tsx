@@ -32,12 +32,25 @@ const PostCard = ({ post }: Props) => {
           title={<Typography variant="h6">{post.author.username}</Typography>}
         />
         {post.content.imageUrl && (
-          <CardMedia
-            component="img"
-            image={post.content.imageUrl}
-            alt={post.content.title}
-          />
+          <>
+            <CardMedia
+              component="img"
+              image={post.content.imageUrl}
+              alt={post.content.title}
+            />
+            <Divider sx={{ mx: 2 }} />
+          </>
         )}
+        <Typography
+          variant="body1"
+          fontWeight="600"
+          textAlign="center"
+          overflow="hidden"
+          textOverflow="ellipsis"
+          py={1}
+        >
+          {post.content.title}
+        </Typography>
         <Divider sx={{ mx: 2 }} />
         <CardActions disableSpacing>
           <IconButton aria-label="like">
@@ -54,16 +67,6 @@ const PostCard = ({ post }: Props) => {
             alignItems="center"
             gap={2}
           >
-            <Typography
-              variant="body1"
-              fontWeight="600"
-              textAlign="center"
-              overflow="hidden"
-              textOverflow="ellipsis"
-              width="90%"
-            >
-              {post.content.title}
-            </Typography>
             <Button
               variant="text"
               size="small"
