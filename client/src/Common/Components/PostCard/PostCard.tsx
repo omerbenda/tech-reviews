@@ -41,7 +41,7 @@ const PostCard = ({ post }: Props) => {
         <Divider sx={{ mx: 2 }} />
         <CardContent>
           <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
-            <Typography variant="h5" textAlign="center" textOverflow="ellipsis" width="100%">
+            <Typography variant="body1" fontWeight="600" textAlign="center" overflow="hidden" textOverflow="ellipsis" width="90%">
               {post.content.title}
             </Typography>
             <Button
@@ -57,7 +57,7 @@ const PostCard = ({ post }: Props) => {
         <Collapse in={isExpanded} timeout="auto" unmountOnExit>
           <Divider sx={{ mx: 2 }} />
           <CardContent>
-            <Typography variant="h6" textAlign="center">
+            <Typography variant="body2" textAlign="center" overflow="hidden" textOverflow="ellipsis">
               {post.content.body}
             </Typography>
           </CardContent>
