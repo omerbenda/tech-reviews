@@ -4,9 +4,10 @@ import Post from '../../Types/Post/Post';
 
 type Props = {
   posts: Post[];
+  onPostOpen: (post: Post) => void;
 };
 
-const PostList = ({ posts }: Props) => {
+const PostList = ({ posts, onPostOpen }: Props) => {
   return (
     <Box
       display="flex"
@@ -24,7 +25,7 @@ const PostList = ({ posts }: Props) => {
         gap="5%"
       >
         {posts.map((post: Post) => (
-          <PostCard post={post} />
+          <PostCard post={post} onPostOpen={onPostOpen} />
         ))}
       </Box>
     </Box>

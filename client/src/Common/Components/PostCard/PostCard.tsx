@@ -13,15 +13,16 @@ import {
   Typography,
 } from '@mui/material';
 import Post from '../../Types/Post/Post';
-import { Favorite } from '@mui/icons-material';
+import { Comment, Favorite } from '@mui/icons-material';
 import StarRating from '../StarRating/StarRating';
 import { useState } from 'react';
 
 type Props = {
   post: Post;
+  onPostOpen: (post: Post) => void;
 };
 
-const PostCard = ({ post }: Props) => {
+const PostCard = ({ post, onPostOpen }: Props) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
 
   return (
@@ -55,6 +56,9 @@ const PostCard = ({ post }: Props) => {
         <CardActions disableSpacing>
           <IconButton aria-label="like">
             <Favorite />
+          </IconButton>
+          <IconButton aria-label="comments" onClick={() => onPostOpen(post)}>
+            <Comment />
           </IconButton>
           <Box display="flex" flexGrow="1" />
           <StarRating rating={post.content.reviewerRating} />
