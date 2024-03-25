@@ -2,6 +2,7 @@ import { Box, Divider, IconButton, Modal, Paper } from '@mui/material';
 import Post from '../../Types/Post/Post';
 import { Favorite } from '@mui/icons-material';
 import StarRating from '../StarRating/StarRating';
+import PostCommentBox from './PostCommentBox';
 
 type Props = {
   post?: Post;
@@ -23,7 +24,7 @@ const PostModal = ({ post, isOpen, closeHandler }: Props) => {
         }}
       >
         <Paper elevation={8} sx={{ width: '100%', height: '100%' }}>
-          <Box display="flex" width="100%" height="100%">
+          <Box display="flex" overflow="hidden" width="100%" height="100%">
             {post?.content.imageUrl && (
               <>
                 <Box display="flex" flexGrow="1">
@@ -82,9 +83,14 @@ const PostModal = ({ post, isOpen, closeHandler }: Props) => {
               display="flex"
               flexDirection="column"
               alignItems="center"
-              width="15%"
+              width="40%"
             >
-              comments
+              {post?.comments.map((comment) => (
+                <>
+                  <PostCommentBox comment={comment} />
+                  <Divider sx={{ width: '90%' }} />
+                </>
+              ))}
             </Box>
           </Box>
         </Paper>
