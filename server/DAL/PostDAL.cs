@@ -10,5 +10,12 @@ namespace tech_reviews.DAL
         {
             return DataManger.Posts;
         }
+
+        public Post AddPost(Post post)
+        {
+            DataManger.Posts.Add(post);
+
+            return post;
+        }
     }
 }

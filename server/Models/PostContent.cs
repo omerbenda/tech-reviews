@@ -1,4 +1,6 @@
-﻿namespace tech_reviews.Models
+﻿using System.Text.Json.Serialization;
+
+namespace tech_reviews.Models
 {
     public class PostContent
     {
@@ -10,6 +12,7 @@
         public PostContent(string title, string body, int reviewerRating)
             : this(title, body, reviewerRating, null) { }
 
+        [JsonConstructor]
         public PostContent(string title, string body, int reviewerRating, string? imageUrl)
         {
             Title = title;
