@@ -43,27 +43,7 @@ const FeedPage = () => {
         >
           <Sidebar users={[]} />
           <Divider orientation="vertical" />
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            gap={2}
-            width="100%"
-          >
-            <Box />
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              width="100%"
-            >
-              <Fab color="primary" onClick={newPostButtonHandler}>
-                <Add />
-              </Fab>
-            </Box>
-            <Box />
-            <PostList posts={posts} onPostOpen={postClickHandler} />
-          </Box>
+          <PostList posts={posts} onPostOpen={postClickHandler} />
         </Box>
       </Box>
       <PostModal
@@ -75,6 +55,11 @@ const FeedPage = () => {
         isOpen={isNewPostModalOpen}
         closeHandler={() => setNewPostModalOpen(false)}
       />
+      <Box position="fixed" right="4%" bottom="4%">
+        <Fab color="primary" onClick={newPostButtonHandler}>
+          <Add />
+        </Fab>
+      </Box>
     </Box>
   );
 };
