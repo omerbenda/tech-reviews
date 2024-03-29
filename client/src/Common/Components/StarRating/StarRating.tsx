@@ -3,11 +3,28 @@ import { Box } from '@mui/material';
 
 const STAR_COUNT = 5;
 
-const createStars: (rating: number) => JSX.Element[] = (rating: number) => {
+const createStars: (
+  rating: number,
+  onSelection?: (starCount: number) => void
+) => JSX.Element[] = (
+  rating: number,
+  onSelection?: (starCount: number) => void
+) => {
   const stars: JSX.Element[] = [];
 
   for (let iter = 0; iter < STAR_COUNT; iter++) {
-    stars.push(<Star sx={{ color: rating > iter ? 'gold' : '#b0b0b0' }} key={iter} />);
+    stars.push(
+      <Box onClick={() => onSelection?.(iter + 1)}>
+        <Star
+          sx={{
+            transition: 'ease',
+            transitionDuration: '650ms',
+            color: rating > iter ? 'gold' : '#b0b0b0',
+          }}
+          key={iter}
+        />
+      </Box>
+    );
   }
 
   return stars;
@@ -15,12 +32,13 @@ const createStars: (rating: number) => JSX.Element[] = (rating: number) => {
 
 type Props = {
   rating: number;
+  onSelection?: (starCount: number) => void;
 };
 
-const StarRating = ({ rating }: Props) => {
+const StarRating = ({ rating, onSelection }: Props) => {
   return (
     <Box display="flex" gap={1}>
-      {createStars(rating)}
+      {createStars(rating, onSelection)}
     </Box>
   );
 };

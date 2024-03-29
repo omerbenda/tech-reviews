@@ -7,6 +7,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useState } from 'react';
+import StarRating from '../StarRating/StarRating';
 
 type Props = {
   isOpen: boolean;
@@ -14,6 +16,9 @@ type Props = {
 };
 
 const NewPostModal = ({ isOpen, closeHandler }: Props) => {
+  const [rating, setRating] = useState<number>(0);
+  const [imageUrl, setImageUrl] = useState<string>('');
+
   return (
     <Modal open={isOpen} onClose={closeHandler}>
       <Box>
@@ -52,15 +57,39 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                   New Post
                 </Typography>
                 <Divider sx={{ width: '100%' }} />
-                <TextField label="Title" variant="filled" />
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="baseline"
+                  flexWrap="wrap"
+                  gap={3}
+                  width="100%"
+                >
+                  <TextField label="Title" variant="filled" />
+                  <StarRating rating={rating} onSelection={setRating} />
+                </Box>
                 <TextField
                   label="Body"
                   variant="filled"
                   multiline
                   fullWidth
-                  minRows={5}
+                  minRows={3}
                   onChange={(e) => console.log(e.target.value)}
                 />
+                <Box
+                  display="flex"
+                  justifyContent="space-evenly"
+                  flexWrap="wrap"
+                  gap={1}
+                  width="100%"
+                >
+                  <TextField
+                    label="Image URL"
+                    variant="filled"
+                    onChange={(e) => setImageUrl(e.target.value)}
+                  />
+                  {imageUrl && <Box component="img" src={imageUrl} />}
+                </Box>
                 <Box
                   display="flex"
                   flexDirection="column"
@@ -70,6 +99,7 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                   <Button variant="contained" size="large">
                     Post
                   </Button>
+                  <Box height="10px" />
                 </Box>
               </Box>
             </Box>

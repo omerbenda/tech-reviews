@@ -1,8 +1,8 @@
 import { Box, Divider, IconButton, Modal, Paper } from '@mui/material';
 import Post from '../../Types/Post/Post';
 import { Favorite } from '@mui/icons-material';
-import StarRating from '../StarRating/StarRating';
 import PostCommentBox from './PostCommentBox';
+import StarRating from '../StarRating/StarRating';
 
 type Props = {
   post?: Post;

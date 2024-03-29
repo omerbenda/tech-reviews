@@ -14,8 +14,8 @@ import {
 } from '@mui/material';
 import Post from '../../Types/Post/Post';
 import { Comment, Favorite } from '@mui/icons-material';
-import StarRating from '../StarRating/StarRating';
 import { useState } from 'react';
+import StarRating from '../StarRating/StarRating';
 
 type Props = {
   post: Post;
