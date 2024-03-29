@@ -1,4 +1,4 @@
-import { Box, Divider } from '@mui/material';
+import { Box, Divider, Fab } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import Post from '../../Common/Types/Post/Post';
 import PostList from '../../Common/Components/PostList/PostList';
@@ -6,11 +6,14 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import PostModal from '../../Common/Components/PostModal/PostModal';
 import { useEffect, useState } from 'react';
 import api from '../../Api/Api';
+import { Add } from '@mui/icons-material';
+import NewPostModal from '../../Common/Components/NewPostModal/NewPostModal';
 
 const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isPostModalOpen, setPostModalOpen] = useState<boolean>(false);
   const [modalPost, setModalPost] = useState<Post>();
+  const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -21,6 +24,10 @@ const FeedPage = () => {
   const postClickHandler = (post: Post) => {
     setPostModalOpen(true);
     setModalPost(post);
+  };
+
+  const newPostButtonHandler = () => {
+    setNewPostModalOpen(true);
   };
 
   return (
@@ -36,13 +43,38 @@ const FeedPage = () => {
         >
           <Sidebar users={[]} />
           <Divider orientation="vertical" />
-          <PostList posts={posts} onPostOpen={postClickHandler} />
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            width="100%"
+          >
+            <Box height="3%" />
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              gap={3}
+              width="100%"
+            >
+              <Box>
+                <Fab color="primary" onClick={newPostButtonHandler}>
+                  <Add />
+                </Fab>
+              </Box>
+              <PostList posts={posts} onPostOpen={postClickHandler} />
+            </Box>
+          </Box>
         </Box>
       </Box>
       <PostModal
         isOpen={isPostModalOpen}
         closeHandler={() => setPostModalOpen(false)}
         post={modalPost}
+      />
+      <NewPostModal
+        isOpen={isNewPostModalOpen}
+        closeHandler={() => setNewPostModalOpen(false)}
       />
     </Box>
   );

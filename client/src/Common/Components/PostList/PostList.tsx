@@ -14,7 +14,6 @@ const PostList = ({ posts, onPostOpen }: Props) => {
       flexDirection="column"
       width="100%"
       height="100%"
-      p={1}
       sx={{ overflowY: 'auto' }}
     >
       <Box
