@@ -47,23 +47,22 @@ const FeedPage = () => {
             display="flex"
             flexDirection="column"
             alignItems="center"
+            gap={2}
             width="100%"
           >
-            <Box height="3%" />
+            <Box />
             <Box
               display="flex"
               flexDirection="column"
               alignItems="center"
-              gap={3}
               width="100%"
             >
-              <Box>
-                <Fab color="primary" onClick={newPostButtonHandler}>
-                  <Add />
-                </Fab>
-              </Box>
-              <PostList posts={posts} onPostOpen={postClickHandler} />
+              <Fab color="primary" onClick={newPostButtonHandler}>
+                <Add />
+              </Fab>
             </Box>
+            <Box />
+            <PostList posts={posts} onPostOpen={postClickHandler} />
           </Box>
         </Box>
       </Box>
