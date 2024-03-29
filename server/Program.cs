@@ -13,6 +13,16 @@ namespace tech_reviews
 
             builder.Services.AddControllers();
 
+            builder.Services.AddCors(
+                options =>
+                {
+                    options.AddDefaultPolicy(
+                        policy =>
+                        {
+                            policy.SetIsOriginAllowed(hostName => true);
+                        });
+                });
+
             builder.Services.AddSingleton<PostDAL>();
             builder.Services.AddSingleton<PostBL>();
 
@@ -21,6 +31,8 @@ namespace tech_reviews
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

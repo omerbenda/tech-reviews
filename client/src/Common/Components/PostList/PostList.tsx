@@ -25,7 +25,7 @@ const PostList = ({ posts, onPostOpen }: Props) => {
         gap="5%"
       >
         {posts.map((post: Post) => (
-          <PostCard post={post} onPostOpen={onPostOpen} />
+          <PostCard post={post} onPostOpen={onPostOpen} key={post.id} />
         ))}
       </Box>
     </Box>
