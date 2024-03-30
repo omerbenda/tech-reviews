@@ -19,6 +19,7 @@ const createStars: (
           sx={{
             transition: 'ease',
             transitionDuration: '650ms',
+            cursor: onSelection ? 'pointer' : 'inherit',
             color: rating > iter ? 'gold' : '#b0b0b0',
           }}
         />
