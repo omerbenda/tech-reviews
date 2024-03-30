@@ -19,7 +19,9 @@ namespace tech_reviews
                     options.AddDefaultPolicy(
                         policy =>
                         {
-                            policy.SetIsOriginAllowed(hostName => true);
+                            policy
+                                .AllowAnyHeader()
+                                .SetIsOriginAllowed(hostName => true);
                         });
                 });
 

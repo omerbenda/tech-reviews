@@ -8,4 +8,8 @@
     <RootNamespace>tech_reviews</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove=".gitignore" />
+  </ItemGroup>
+
 </Project>

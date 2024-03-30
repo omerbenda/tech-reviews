@@ -7,8 +7,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import StarRating from '../StarRating/StarRating';
+import NewPost from '../../Types/Post/NewPost';
+import api from '../../../Api/Api';
 
 type Props = {
   isOpen: boolean;
@@ -18,6 +20,22 @@ type Props = {
 const NewPostModal = ({ isOpen, closeHandler }: Props) => {
   const [rating, setRating] = useState<number>(0);
   const [imageUrl, setImageUrl] = useState<string>('');
+  const titleInputRef = useRef<HTMLInputElement>();
+  const bodyInputRef = useRef<HTMLInputElement>();
+
+  const submit = () => {
+    const newPost: NewPost = {
+      authorId: '',
+      content: {
+        title: titleInputRef.current?.value || '',
+        body: bodyInputRef.current?.value || '',
+        reviewerRating: rating,
+        imageUrl,
+      },
+    };
+
+    api.posts.add(newPost);
+  };
 
   return (
     <Modal open={isOpen} onClose={closeHandler}>
@@ -65,7 +83,11 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                   gap={3}
                   width="100%"
                 >
-                  <TextField label="Title" variant="filled" />
+                  <TextField
+                    label="Title"
+                    variant="filled"
+                    inputRef={titleInputRef}
+                  />
                   <StarRating rating={rating} onSelection={setRating} />
                 </Box>
                 <TextField
@@ -75,6 +97,7 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                   fullWidth
                   minRows={3}
                   onChange={(e) => console.log(e.target.value)}
+                  inputRef={bodyInputRef}
                 />
                 <Box
                   display="flex"
@@ -96,7 +119,7 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                   flexGrow="1"
                   justifyContent="end"
                 >
-                  <Button variant="contained" size="large">
+                  <Button variant="contained" size="large" onClick={submit}>
                     Post
                   </Button>
                   <Box height="10px" />

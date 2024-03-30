@@ -14,14 +14,13 @@ const createStars: (
 
   for (let iter = 0; iter < STAR_COUNT; iter++) {
     stars.push(
-      <Box onClick={() => onSelection?.(iter + 1)}>
+      <Box onClick={() => onSelection?.(iter + 1)} key={iter}>
         <Star
           sx={{
             transition: 'ease',
             transitionDuration: '650ms',
             color: rating > iter ? 'gold' : '#b0b0b0',
           }}
-          key={iter}
         />
       </Box>
     );
