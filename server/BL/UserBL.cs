@@ -18,6 +18,11 @@ namespace tech_reviews.BL
             return _userDAL.GetUserById(id);
         }
 
+        public User? Login(LoginParamsDTO loginParams)
+        {
+            return _userDAL.GetUserByName(loginParams.Username);
+        }
+
         public User AddUser(NewUserDTO newUser)
         {
             User user = new User(Guid.NewGuid(), newUser.Username);

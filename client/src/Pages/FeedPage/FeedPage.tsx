@@ -8,12 +8,16 @@ import { useEffect, useState } from 'react';
 import api from '../../Api/Api';
 import { Add } from '@mui/icons-material';
 import NewPostModal from '../../Common/Components/NewPostModal/NewPostModal';
+import { useGeneralStore } from '../../Stores/GeneralStore';
+import User from '../../Common/Types/User/User';
 
 const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isPostModalOpen, setPostModalOpen] = useState<boolean>(false);
   const [modalPost, setModalPost] = useState<Post>();
   const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
+
+  const currentUser: User | undefined = useGeneralStore((state) => state.currentUser);
 
   useEffect(() => {
     (async () => {
@@ -41,7 +45,7 @@ const FeedPage = () => {
           gap="10px"
           height="100%"
         >
-          <Sidebar users={[]} />
+          <Sidebar users={currentUser ? [currentUser] : []} />
           <Divider orientation="vertical" />
           <PostList posts={posts} onPostOpen={postClickHandler} />
         </Box>

@@ -17,7 +17,7 @@ namespace tech_reviews.Controllers
         }
 
         [HttpGet("{userId:guid}")]
-        public ActionResult<User> GetUser(Guid userId)
+        public ActionResult<UserDTO> GetUser(Guid userId)
         {
             User? user = _userBL.GetUserById(userId);
 
@@ -26,15 +26,28 @@ namespace tech_reviews.Controllers
                 return NotFound("User not found");
             }
 
-            return user;
+            return new UserDTO(user);
+        }
+
+        [HttpPost("login")]
+        public ActionResult<UserDTO> Login([FromBody] LoginParamsDTO loginParams)
+        {
+            User? user = _userBL.Login(loginParams);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            return new UserDTO(user);
         }
 
         [HttpPost]
-        public ActionResult<User> AddUser([FromBody] NewUserDTO newUser)
+        public ActionResult<UserDTO> AddUser([FromBody] NewUserDTO newUser)
         {
             try
             {
-                return _userBL.AddUser(newUser);
+                return new UserDTO(_userBL.AddUser(newUser));
             }
             catch (ArgumentException ex)
             {
