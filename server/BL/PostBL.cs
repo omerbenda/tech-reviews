@@ -22,16 +22,12 @@ namespace tech_reviews.BL
 
         public Post AddPost(NewPostDTO newPost)
         {
-            User? author = _userDAL.GetUserById(newPost.AuthorId);
-
-            if (author == null)
-            {
-                throw new ArgumentException("Non-existent user id");
-            }
-
+            User author = _userDAL.GetUserById(newPost.AuthorId)
+                            ?? throw new ArgumentException("Non-existent user id");
             Post post = new Post(Guid.NewGuid(), author, newPost.Content);
+            _postDAL.AddPost(post);
 
-            return _postDAL.AddPost(post);
+            return post;
         }
     }
 }

@@ -10,5 +10,10 @@ namespace tech_reviews.DAL
         {
             return DataManger.Users.Find(user => user.Id.Equals(id));
         }
+
+        public void AddUser(User newUser)
+        {
+            DataManger.Users.Add(newUser);
+        }
     }
 }

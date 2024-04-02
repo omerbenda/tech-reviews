@@ -28,6 +28,7 @@ namespace tech_reviews
             builder.Services.AddSingleton<PostDAL>();
             builder.Services.AddSingleton<UserDAL>();
             builder.Services.AddSingleton<PostBL>();
+            builder.Services.AddSingleton<UserBL>();
 
             WebApplication app = builder.Build();
 

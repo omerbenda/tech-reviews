@@ -10,22 +10,33 @@ namespace tech_reviews.Controllers
     public class PostController : ControllerBase
     {
         private readonly PostBL _postBL;
-        
+
         public PostController(PostBL postBL)
         {
             _postBL = postBL;
         }
 
         [HttpGet]
-        public List<Post> Get()
+        public ActionResult<List<Post>> Get()
         {
             return _postBL.GetPosts();
         }
 
         [HttpPost]
-        public Post AddPost([FromBody] NewPostDTO post)
+        public ActionResult<Post> AddPost([FromBody] NewPostDTO post)
         {
-            return _postBL.AddPost(post);
+            try
+            {
+                return _postBL.AddPost(post);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return Problem(statusCode: 500);
+            }
         }
     }
 }
