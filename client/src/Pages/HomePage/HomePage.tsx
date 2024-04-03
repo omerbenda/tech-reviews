@@ -1,17 +1,20 @@
 import { Box, Button, TextField } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import api from '../../Api/Api';
 import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
+import RegisterModal from './Components/RegisterModal/RegisterModal';
 
 const HomePage = () => {
+  const [registerModalOpen, setRegisterModalOpen] = useState<boolean>(false);
   const usernameInputRef = useRef<HTMLInputElement>();
 
   const setUser: (user: User) => void = useGeneralStore(
     (state) => state.setUser
   );
+
   const navigate = useNavigate();
 
   const login = async () => {
@@ -47,7 +50,19 @@ const HomePage = () => {
         >
           Login
         </Button>
+        <Button
+          variant="text"
+          color="secondary"
+          onClick={() => setRegisterModalOpen(true)}
+          sx={{ p: 0 }}
+        >
+          Create an account
+        </Button>
       </Box>
+      <RegisterModal
+        open={registerModalOpen}
+        closeHandler={() => setRegisterModalOpen(false)}
+      />
     </Box>
   );
 };

@@ -19,7 +19,7 @@ const api = {
     login: async (loginParams: LoginParams): Promise<AxiosResponse<User>> => {
       return axiosInstance.post('/user/login', loginParams);
     },
-    add: async (user: NewUser): Promise<AxiosResponse<User>> => {
+    register: async (user: NewUser): Promise<AxiosResponse<User>> => {
       return axiosInstance.post('/user', user);
     },
   },

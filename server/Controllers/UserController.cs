@@ -43,7 +43,7 @@ namespace tech_reviews.Controllers
         }
 
         [HttpPost]
-        public ActionResult<UserDTO> AddUser([FromBody] NewUserDTO newUser)
+        public ActionResult<UserDTO> Register([FromBody] NewUserDTO newUser)
         {
             try
             {
