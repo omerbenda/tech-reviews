@@ -11,6 +11,8 @@ import { useRef, useState } from 'react';
 import StarRating from '../StarRating/StarRating';
 import NewPost from '../../Types/Post/NewPost';
 import api from '../../../Api/Api';
+import { useGeneralStore } from '../../../Stores/GeneralStore';
+import User from '../../Types/User/User';
 
 type Props = {
   isOpen: boolean;
@@ -23,18 +25,22 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
   const titleInputRef = useRef<HTMLInputElement>();
   const bodyInputRef = useRef<HTMLInputElement>();
 
-  const submit = () => {
-    const newPost: NewPost = {
-      authorId: '',
-      content: {
-        title: titleInputRef.current?.value || '',
-        body: bodyInputRef.current?.value || '',
-        reviewerRating: rating,
-        imageUrl,
-      },
-    };
+  const currentUser: User | undefined = useGeneralStore((state) => state.currentUser);
 
-    api.posts.add(newPost);
+  const submit = () => {
+    if (currentUser) {
+      const newPost: NewPost = {
+        authorId: currentUser.id,
+        content: {
+          title: titleInputRef.current?.value || '',
+          body: bodyInputRef.current?.value || '',
+          reviewerRating: rating,
+          imageUrl,
+        },
+      };
+  
+      api.posts.add(newPost);
+    }
   };
 
   return (
