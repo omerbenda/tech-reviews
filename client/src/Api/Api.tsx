@@ -5,22 +5,41 @@ import NewPost from '../Common/Types/Post/NewPost';
 import NewUser from '../Common/Types/User/NewUser';
 import User from '../Common/Types/User/User';
 import LoginParams from '../Common/Types/User/LoginParams';
+import LoginResponse from '../Common/Types/Identity/LoginResponse';
+
+// todo find how to add token to necessary requests
 
 const api = {
   posts: {
     get: async (): Promise<AxiosResponse<Post[]>> => {
-      return axiosInstance.get('/post');
+      return axiosInstance.get('/post', {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      });
     },
     add: async (post: NewPost): Promise<AxiosResponse<Post>> => {
-      return axiosInstance.post('/post', post);
+      return axiosInstance.post('/post', post, {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      });
     },
   },
   users: {
-    login: async (loginParams: LoginParams): Promise<AxiosResponse<User>> => {
-      return axiosInstance.post('/user/login', loginParams);
+    get: async (id: string): Promise<AxiosResponse<User>> => {
+      return axiosInstance.get(`/user/${id}`);
     },
     register: async (user: NewUser): Promise<AxiosResponse<User>> => {
       return axiosInstance.post('/user', user);
+    },
+  },
+  identity: {
+    login: async (
+      loginParams: LoginParams
+    ): Promise<AxiosResponse<LoginResponse>> => {
+      return axiosInstance.post('/identity/login', loginParams);
+    },
+    getSelf: async (): Promise<AxiosResponse<User>> => {
+      return axiosInstance.get(`/identity/user`, {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      });
     },
   },
 };

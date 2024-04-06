@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using tech_reviews.BL;
 using tech_reviews.DTO;
 using tech_reviews.Models;
 
 namespace tech_reviews.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("user")]
     public class UserController : ControllerBase
@@ -20,19 +22,6 @@ namespace tech_reviews.Controllers
         public ActionResult<UserDTO> GetUser(Guid userId)
         {
             User? user = _userBL.GetUserById(userId);
-
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            return new UserDTO(user);
-        }
-
-        [HttpPost("login")]
-        public ActionResult<UserDTO> Login([FromBody] LoginParamsDTO loginParams)
-        {
-            User? user = _userBL.Login(loginParams);
 
             if (user == null)
             {

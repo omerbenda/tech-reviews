@@ -5,7 +5,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleTitleClick = () => {
-    navigate('/');
+    navigate('/'); // todo remove
   };
 
   return (

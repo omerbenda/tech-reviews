@@ -18,9 +18,9 @@ namespace tech_reviews.BL
             return _userDAL.GetUserById(id);
         }
 
-        public User? Login(LoginParamsDTO loginParams)
+        public User? GetUserByName(string username)
         {
-            return _userDAL.GetUserByName(loginParams.Username);
+            return _userDAL.GetUserByName(username);
         }
 
         public User AddUser(NewUserDTO newUser)

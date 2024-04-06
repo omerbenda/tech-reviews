@@ -21,7 +21,7 @@ const RegisterModal = ({ open, closeHandler }: Props) => {
   const usernameInputRef = useRef<HTMLInputElement>();
 
   const setUser: (user: User) => void = useGeneralStore(
-    (state) => state.setUser
+    (state) => state.setCurrentUser
   );
 
   const navigate = useNavigate();

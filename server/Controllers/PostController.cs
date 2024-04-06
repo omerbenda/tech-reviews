@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using tech_reviews.BL;
 using tech_reviews.DTO;
 using tech_reviews.Models;
 
 namespace tech_reviews.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("post")]
     public class PostController : ControllerBase

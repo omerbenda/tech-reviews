@@ -6,27 +6,29 @@ import api from '../../Api/Api';
 import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
 import RegisterModal from './Components/RegisterModal/RegisterModal';
+import LoginResponse from '../../Common/Types/Identity/LoginResponse';
 
 const HomePage = () => {
   const [registerModalOpen, setRegisterModalOpen] = useState<boolean>(false);
   const usernameInputRef = useRef<HTMLInputElement>();
 
-  const setUser: (user: User) => void = useGeneralStore(
-    (state) => state.setUser
+  const setCurrentUser: (user: User) => void = useGeneralStore(
+    (state) => state.setCurrentUser
   );
 
   const navigate = useNavigate();
 
   const login = async () => {
     if (usernameInputRef.current) {
-      const user: User = (
-        await api.users.login({
+      const loginResponse: LoginResponse = (
+        await api.identity.login({
           username: usernameInputRef.current.value,
         })
       ).data;
 
-      setUser(user);
-      navigate('feed');
+      document.cookie = `${loginResponse.token}`; // todo fix this to use token={token};
+      setCurrentUser(loginResponse.user);
+      navigate('/feed');
     }
   };
 
