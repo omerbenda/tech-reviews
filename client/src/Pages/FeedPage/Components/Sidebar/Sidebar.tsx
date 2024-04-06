@@ -16,7 +16,7 @@ const Sidebar = ({ users }: Props) => {
     >
       <Typography variant="h5">Users:</Typography>
       {users.map((user) => (
-        <Typography variant="h6">* {user.username}</Typography>
+        <Typography variant="h6" key={user.id}>* {user.username}</Typography>
       ))}
     </Box>
   );

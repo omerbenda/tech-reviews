@@ -101,7 +101,6 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                 multiline
                 fullWidth
                 minRows={3}
-                onChange={(e) => console.log(e.target.value)}
                 inputRef={bodyInputRef}
               />
               <Box
