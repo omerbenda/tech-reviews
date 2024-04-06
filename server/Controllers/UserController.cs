@@ -30,22 +30,5 @@ namespace tech_reviews.Controllers
 
             return new UserDTO(user);
         }
-
-        [HttpPost]
-        public ActionResult<UserDTO> Register([FromBody] NewUserDTO newUser)
-        {
-            try
-            {
-                return new UserDTO(_userBL.AddUser(newUser));
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch
-            {
-                return Problem(statusCode: 500);
-            }
-        }
     }
 }

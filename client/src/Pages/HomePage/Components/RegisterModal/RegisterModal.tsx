@@ -28,14 +28,16 @@ const RegisterModal = ({ open, closeHandler }: Props) => {
 
   const register = async () => {
     if (usernameInputRef.current) {
-      const user: User = (
-        await api.users.register({
+      const token: string = (
+        await api.identity.register({
           username: usernameInputRef.current.value,
         })
       ).data;
 
-      setUser(user);
-      navigate('feed');
+      document.cookie = `${token}`; // todo change this
+
+      setUser((await api.identity.getSelf()).data);
+      navigate('/feed');
     }
   };
 

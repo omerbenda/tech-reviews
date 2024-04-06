@@ -2,7 +2,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using tech_reviews.DAL;
 using tech_reviews.DTO;
 using tech_reviews.Models;
 
@@ -30,6 +29,13 @@ namespace tech_reviews.BL
             }
 
             return new LoginResponseDTO(GenerateToken(user), new UserDTO(user));
+        }
+
+        public string Register(NewUserDTO newUser)
+        {
+            User user = _userBL.AddUser(newUser);
+
+            return GenerateToken(user);
         }
 
         public User? GetUserFromIdentity(ClaimsPrincipal user)

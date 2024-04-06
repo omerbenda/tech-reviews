@@ -29,6 +29,23 @@ namespace tech_reviews.Controllers
             return response;
         }
 
+        [HttpPost("register")]
+        public ActionResult<string> Register([FromBody] NewUserDTO newUser)
+        {
+            try
+            {
+                return _identityBL.Register(newUser);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch
+            {
+                return Problem(statusCode: 500);
+            }
+        }
+
         [HttpGet("user")]
         public ActionResult<UserDTO> GetUserFromToken()
         {

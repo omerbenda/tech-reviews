@@ -26,15 +26,15 @@ const api = {
     get: async (id: string): Promise<AxiosResponse<User>> => {
       return axiosInstance.get(`/user/${id}`);
     },
-    register: async (user: NewUser): Promise<AxiosResponse<User>> => {
-      return axiosInstance.post('/user', user);
-    },
   },
   identity: {
     login: async (
       loginParams: LoginParams
     ): Promise<AxiosResponse<LoginResponse>> => {
       return axiosInstance.post('/identity/login', loginParams);
+    },
+    register: async (user: NewUser): Promise<AxiosResponse<string>> => {
+      return axiosInstance.post('/identity/register', user);
     },
     getSelf: async (): Promise<AxiosResponse<User>> => {
       return axiosInstance.get(`/identity/user`, {
