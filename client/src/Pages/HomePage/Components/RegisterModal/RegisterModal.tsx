@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -13,11 +13,12 @@ import { useNavigate } from 'react-router-dom';
 import User from '../../../../Common/Types/User/User';
 
 type Props = {
-  open: boolean;
+  isOpen: boolean;
   closeHandler: () => void;
 };
 
-const RegisterModal = ({ open, closeHandler }: Props) => {
+const RegisterModal = ({ isOpen, closeHandler }: Props) => {
+  const [imageUrl, setImageUrl] = useState<string>('');
   const usernameInputRef = useRef<HTMLInputElement>();
 
   const setUser: (user: User) => void = useGeneralStore(
@@ -42,7 +43,7 @@ const RegisterModal = ({ open, closeHandler }: Props) => {
   };
 
   return (
-    <Modal open={open} onClose={closeHandler}>
+    <Modal open={isOpen} onClose={closeHandler}>
       <Box
         position="absolute"
         top="50%"
@@ -53,10 +54,14 @@ const RegisterModal = ({ open, closeHandler }: Props) => {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        <Paper elevation={8} sx={{ width: '100%', height: '100%' }}>
+        <Paper
+          elevation={8}
+          sx={{ overflowY: 'hidden', width: '100%', height: '100%' }}
+        >
           <Box
             display="flex"
             flexDirection="column"
+            overflow="auto"
             gap={1}
             width="100%"
             height="100%"
@@ -71,11 +76,28 @@ const RegisterModal = ({ open, closeHandler }: Props) => {
               flexGrow="1"
               justifyContent="center"
               alignItems="center"
-              overflow="hidden"
               gap={3}
               width="100%"
             >
-              <TextField label="Username" inputRef={usernameInputRef} />
+              <TextField
+                label="Username"
+                variant="filled"
+                inputRef={usernameInputRef}
+              />
+              <Box
+                display="flex"
+                justifyContent="space-evenly"
+                flexWrap="wrap"
+                gap={1}
+                width="100%"
+              >
+                <TextField
+                  label="Image URL"
+                  variant="filled"
+                  onChange={(e) => setImageUrl(e.target.value)}
+                />
+                {imageUrl && <Box component="img" src={imageUrl} />}
+              </Box>
               <Button variant="contained" onClick={register}>
                 Register
               </Button>

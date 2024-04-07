@@ -62,7 +62,7 @@ const HomePage = () => {
         </Button>
       </Box>
       <RegisterModal
-        open={registerModalOpen}
+        isOpen={registerModalOpen}
         closeHandler={() => setRegisterModalOpen(false)}
       />
     </Box>
