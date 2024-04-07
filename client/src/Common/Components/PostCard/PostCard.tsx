@@ -64,36 +64,40 @@ const PostCard = ({ post, onPostOpen }: Props) => {
           <StarRating rating={post.content.reviewerRating} />
         </CardActions>
         <Divider sx={{ mx: 2 }} />
-        <CardContent>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            gap={2}
-          >
-            <Button
-              variant="text"
-              size="small"
-              onClick={() => setExpanded((currVal) => !currVal)}
-              sx={{ color: 'gray' }}
-            >
-              {isExpanded ? 'Less' : 'More'}
-            </Button>
-          </Box>
-        </CardContent>
-        <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-          <Divider sx={{ mx: 2 }} />
-          <CardContent>
-            <Typography
-              variant="body2"
-              textAlign="center"
-              overflow="hidden"
-              textOverflow="ellipsis"
-            >
-              {post.content.body}
-            </Typography>
-          </CardContent>
-        </Collapse>
+        {post.content.body && (
+          <>
+            <CardContent>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                gap={2}
+              >
+                <Button
+                  variant="text"
+                  size="small"
+                  onClick={() => setExpanded((currVal) => !currVal)}
+                  sx={{ color: 'gray' }}
+                >
+                  {isExpanded ? 'Less' : 'More'}
+                </Button>
+              </Box>
+            </CardContent>
+            <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+              <Divider sx={{ mx: 2 }} />
+              <CardContent>
+                <Typography
+                  variant="body2"
+                  textAlign="center"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                >
+                  {post.content.body}
+                </Typography>
+              </CardContent>
+            </Collapse>
+          </>
+        )}
       </Card>
     </Box>
   );
