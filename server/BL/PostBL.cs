@@ -1,4 +1,5 @@
-﻿using tech_reviews.DAL;
+﻿using System.Security.Claims;
+using tech_reviews.DAL;
 using tech_reviews.DTO;
 using tech_reviews.Models;
 
@@ -20,9 +21,16 @@ namespace tech_reviews.BL
             return _postDAL.GetPosts();
         }
 
-        public Post AddPost(NewPostDTO newPost)
+        public Post AddPostByUser(NewPostDTO newPost, ClaimsPrincipal claimsUser)
         {
-            User author = _userDAL.GetUserById(newPost.AuthorId)
+            string idClaim = IdentityBL.GetIdFromToken(claimsUser);
+
+            return AddPost(newPost, Guid.Parse(idClaim));
+        }
+
+        public Post AddPost(NewPostDTO newPost, Guid userId)
+        {
+            User author = _userDAL.GetUserById(userId)
                             ?? throw new ArgumentException("Non-existent user id");
             Post post = new Post(Guid.NewGuid(), author, newPost.Content);
             _postDAL.AddPost(post);

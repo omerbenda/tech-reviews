@@ -29,7 +29,7 @@ namespace tech_reviews.Controllers
         {
             try
             {
-                return _postBL.AddPost(post);
+                return _postBL.AddPostByUser(post, User);
             }
             catch (ArgumentException ex)
             {

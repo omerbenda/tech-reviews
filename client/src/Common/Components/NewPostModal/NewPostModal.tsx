@@ -32,7 +32,6 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
   const submit = async () => {
     if (currentUser) {
       const newPost: NewPost = {
-        authorId: currentUser.id,
         content: {
           title: titleInputRef.current?.value || '',
           body: bodyInputRef.current?.value || '',

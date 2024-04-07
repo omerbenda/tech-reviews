@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using tech_reviews.DAL;
 using tech_reviews.DTO;
 using tech_reviews.Models;
 
@@ -9,19 +10,19 @@ namespace tech_reviews.BL
 {
     public class IdentityBL
     {
-        private readonly UserBL _userBL;
+        private readonly UserDAL _userDAL;
 
         private readonly string TokenKey;
 
-        public IdentityBL(UserBL userBL, IConfiguration configuration)
+        public IdentityBL(UserDAL userDAL, IConfiguration configuration)
         {
-            _userBL = userBL;
+            _userDAL = userDAL;
             TokenKey = configuration["JwtSettings:Key"]!;
         }
 
         public LoginResponseDTO? Login(LoginParamsDTO loginParams)
         {
-            User? user = _userBL.GetUserByName(loginParams.Username);
+            User? user = _userDAL.GetUserByName(loginParams.Username);
 
             if (user == null)
             {
@@ -33,16 +34,17 @@ namespace tech_reviews.BL
 
         public string Register(NewUserDTO newUser)
         {
-            User user = _userBL.AddUser(newUser);
+            User user = new User(Guid.NewGuid(), newUser.Username);
+            _userDAL.AddUser(user);
 
             return GenerateToken(user);
         }
 
-        public User? GetUserFromIdentity(ClaimsPrincipal user)
+        public User? GetUserFromIdentity(ClaimsPrincipal claimsUser)
         {
-            string id = user.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+            string id = GetIdFromToken(claimsUser);
 
-            return _userBL.GetUserById(Guid.Parse(id));
+            return _userDAL.GetUserById(Guid.Parse(id));
         }
 
         public string GenerateToken(User user)
@@ -53,6 +55,7 @@ namespace tech_reviews.BL
             [
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                // TODO: Add time limit
             ];
 
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
@@ -69,6 +72,11 @@ namespace tech_reviews.BL
             string jwt = tokenHandler.WriteToken(token);
 
             return jwt;
+        }
+
+        public static string GetIdFromToken(ClaimsPrincipal user)
+        {
+            return user.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         }
     }
 }

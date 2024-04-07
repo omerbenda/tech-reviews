@@ -22,13 +22,5 @@ namespace tech_reviews.BL
         {
             return _userDAL.GetUserByName(username);
         }
-
-        public User AddUser(NewUserDTO newUser)
-        {
-            User user = new User(Guid.NewGuid(), newUser.Username);
-            _userDAL.AddUser(user);
-
-            return user;
-        }
     }
 }

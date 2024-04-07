@@ -6,13 +6,11 @@ namespace tech_reviews.DTO
     public class NewPostDTO
     {
         public PostContent Content { get; set; }
-        public Guid AuthorId { get; set; }
 
         [JsonConstructor]
-        public NewPostDTO(PostContent content, Guid authorId)
+        public NewPostDTO(PostContent content)
         {
             Content = content;
-            AuthorId = authorId;
         }
     }
 }
