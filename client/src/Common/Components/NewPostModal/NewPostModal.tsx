@@ -25,9 +25,11 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
   const titleInputRef = useRef<HTMLInputElement>();
   const bodyInputRef = useRef<HTMLInputElement>();
 
-  const currentUser: User | undefined = useGeneralStore((state) => state.currentUser);
+  const currentUser: User | undefined = useGeneralStore(
+    (state) => state.currentUser
+  );
 
-  const submit = () => {
+  const submit = async () => {
     if (currentUser) {
       const newPost: NewPost = {
         authorId: currentUser.id,
@@ -38,8 +40,9 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
           imageUrl,
         },
       };
-  
-      api.posts.add(newPost);
+
+      await api.posts.add(newPost);
+      closeHandler();
     }
   };
 
