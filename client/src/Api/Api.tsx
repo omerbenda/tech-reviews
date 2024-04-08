@@ -6,6 +6,7 @@ import NewUser from '../Common/Types/User/NewUser';
 import User from '../Common/Types/User/User';
 import LoginParams from '../Common/Types/User/LoginParams';
 import LoginResponse from '../Common/Types/Identity/LoginResponse';
+import NewPostComment from '../Common/Types/Post/NewPostComment';
 
 // todo find how to add token to necessary requests
 
@@ -18,6 +19,13 @@ const api = {
     },
     add: async (post: NewPost): Promise<AxiosResponse<Post>> => {
       return axiosInstance.post('/post', post, {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      });
+    },
+    addComment: async (
+      comment: NewPostComment
+    ): Promise<AxiosResponse<Post>> => {
+      return axiosInstance.post('/post/comment', comment, {
         headers: { Authorization: `Bearer ${document.cookie}` },
       });
     },

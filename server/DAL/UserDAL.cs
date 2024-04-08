@@ -8,17 +8,17 @@ namespace tech_reviews.DAL
 
         public User? GetUserById(Guid id)
         {
-            return DataManger.Users.Find(user => user.Id.Equals(id));
+            return DataManager.Users.Find(user => user.Id.Equals(id));
         }
 
         public User? GetUserByName(string username)
         {
-            return DataManger.Users.Find(user => user.Username.Equals(username));
+            return DataManager.Users.Find(user => user.Username.Equals(username));
         }
 
         public void AddUser(User newUser)
         {
-            DataManger.Users.Add(newUser);
+            DataManager.Users.Add(newUser);
         }
     }
 }

@@ -3,13 +3,13 @@
     public class PostComment
     {
         public Guid Id { get; set; }
-        public User Author { get; set; }
+        public User User { get; set; }
         public string Body { get; set; }
 
-        public PostComment(Guid id, User author, string body)
+        public PostComment(Guid id, User user, string body)
         {
             Id = id;
-            Author = author;
+            User = user;
             Body = body;
         }
     }

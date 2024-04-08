@@ -40,5 +40,18 @@ namespace tech_reviews.Controllers
                 return Problem(statusCode: 500);
             }
         }
+
+        [HttpPost("comment")]
+        public ActionResult<Post> AddCommentToPost([FromBody] NewCommentDTO commentDTO)
+        {
+            Post? updatedPost = _postBL.AddCommentToPost(commentDTO, User);
+
+            if (updatedPost == null)
+            {
+                return BadRequest();
+            }
+
+            return updatedPost;
+        }
     }
 }

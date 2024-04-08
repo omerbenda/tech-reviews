@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 using tech_reviews.DAL;
 using tech_reviews.DTO;
 using tech_reviews.Models;
@@ -36,6 +37,15 @@ namespace tech_reviews.BL
             _postDAL.AddPost(post);
 
             return post;
+        }
+
+        public Post? AddCommentToPost(NewCommentDTO newComment, ClaimsPrincipal claimsUser)
+        {
+            string idClaim = IdentityBL.GetIdFromToken(claimsUser);
+            User author = _userDAL.GetUserById(Guid.Parse(idClaim))
+                            ?? throw new ArgumentException("Non-existent user id");
+
+            return _postDAL.AddCommentToPost(newComment.PostId, new PostComment(Guid.NewGuid(), author, newComment.Body));
         }
     }
 }

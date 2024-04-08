@@ -8,12 +8,31 @@ namespace tech_reviews.DAL
 
         public List<Post> GetPosts()
         {
-            return DataManger.Posts;
+            return DataManager.Posts;
         }
 
         public void AddPost(Post post)
         {
-            DataManger.Posts.Add(post);
+            DataManager.Posts.Add(post);
+        }
+
+        public Post? GetPostById(Guid id)
+        {
+            return DataManager.Posts.FirstOrDefault(post => post.Id.Equals(id));
+        }
+
+        public Post? AddCommentToPost(Guid postId, PostComment comment)
+        {
+            Post? post = GetPostById(postId);
+
+            if (post == null)
+            {
+                return null;
+            }
+
+            post.Comments.Add(comment);
+            
+            return post;
         }
     }
 }

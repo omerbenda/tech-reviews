@@ -3,6 +3,8 @@ import Post from '../../Types/Post/Post';
 import { Favorite } from '@mui/icons-material';
 import PostCommentBox from './PostCommentBox';
 import StarRating from '../StarRating/StarRating';
+import React from 'react';
+import PostCommentInput from './PostCommentInput';
 
 type Props = {
   post?: Post;
@@ -86,11 +88,13 @@ const PostModal = ({ post, isOpen, closeHandler }: Props) => {
               width="40%"
             >
               {post?.comments.map((comment) => (
-                <>
+                <React.Fragment key={comment.id}>
                   <PostCommentBox comment={comment} />
                   <Divider sx={{ width: '90%' }} />
-                </>
+                </React.Fragment>
               ))}
+              <Box flexGrow="1" />
+              <PostCommentInput postId={post?.id || ''} />
             </Box>
           </Box>
         </Paper>
