@@ -3,21 +3,26 @@ import { Box, Button, TextField } from '@mui/material';
 import { useRef } from 'react';
 import NewPostComment from '../../Types/Post/NewPostComment';
 import api from '../../../Api/Api';
+import Post from '../../Types/Post/Post';
 
 type Props = {
   postId: string;
+  updatePost: (updatedPost: Post) => void;
 };
 
-const PostCommentInput = ({ postId }: Props) => {
+const PostCommentInput = ({ postId, updatePost }: Props) => {
   const commentInputRef = useRef<HTMLInputElement>();
 
   const sendComment = async () => {
-    const comment: NewPostComment = {
-      postId,
-      body: commentInputRef.current?.value || '',
-    };
+    if (commentInputRef.current) {
+      const comment: NewPostComment = {
+        postId,
+        body: commentInputRef.current.value,
+      };
 
-    console.log((await api.posts.addComment(comment)).data);
+      await updatePost((await api.posts.addComment(comment)).data);
+      commentInputRef.current.value = '';
+    }
   };
 
   return (

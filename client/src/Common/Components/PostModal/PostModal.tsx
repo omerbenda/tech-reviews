@@ -10,9 +10,10 @@ type Props = {
   post?: Post;
   isOpen: boolean;
   closeHandler: () => void;
+  updatePost: (updatedPost: Post) => void;
 };
 
-const PostModal = ({ post, isOpen, closeHandler }: Props) => {
+const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
   return (
     <Modal open={isOpen} onClose={closeHandler}>
       <Box
@@ -94,7 +95,10 @@ const PostModal = ({ post, isOpen, closeHandler }: Props) => {
                 </React.Fragment>
               ))}
               <Box flexGrow="1" />
-              <PostCommentInput postId={post?.id || ''} />
+              <PostCommentInput
+                postId={post?.id || ''}
+                updatePost={updatePost}
+              />
             </Box>
           </Box>
         </Paper>

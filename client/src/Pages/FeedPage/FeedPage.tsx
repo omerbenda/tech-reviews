@@ -17,7 +17,9 @@ const FeedPage = () => {
   const [modalPost, setModalPost] = useState<Post>();
   const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
 
-  const currentUser: User | undefined = useGeneralStore((state) => state.currentUser);
+  const currentUser: User | undefined = useGeneralStore(
+    (state) => state.currentUser
+  );
 
   useEffect(() => {
     (async () => {
@@ -32,6 +34,18 @@ const FeedPage = () => {
 
   const newPostButtonHandler = () => {
     setNewPostModalOpen(true);
+  };
+
+  const updatePost = (updatedPost: Post): void => {
+    setPosts((curr) =>
+      curr.map((post) => {
+        return post.id === updatedPost.id ? updatedPost : post;
+      })
+    );
+
+    if (updatedPost.id === modalPost?.id) {
+      setModalPost(updatedPost);
+    }
   };
 
   return (
@@ -54,6 +68,7 @@ const FeedPage = () => {
         isOpen={isPostModalOpen}
         closeHandler={() => setPostModalOpen(false)}
         post={modalPost}
+        updatePost={updatePost}
       />
       <NewPostModal
         isOpen={isNewPostModalOpen}
