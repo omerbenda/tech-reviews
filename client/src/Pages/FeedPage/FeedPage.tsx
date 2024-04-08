@@ -12,7 +12,7 @@ import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
 
 const FeedPage = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]); // TODO: switch to post headers here
   const [isPostModalOpen, setPostModalOpen] = useState<boolean>(false);
   const [modalPost, setModalPost] = useState<Post>();
   const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
-import { CssBaseline } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import router from './Router';
 import { useGeneralStore } from './Stores/GeneralStore';
 import api from './Api/Api';
+import ThemeController from './Common/Components/ThemeController/ThemeController';
 
 const App = () => {
   const currentUser = useGeneralStore((state) => state.currentUser);
@@ -32,8 +32,9 @@ const App = () => {
 
   return (
     <React.StrictMode>
-      <CssBaseline />
-      <RouterProvider router={router} />
+      <ThemeController>
+        <RouterProvider router={router} />
+      </ThemeController>
     </React.StrictMode>
   );
 };
