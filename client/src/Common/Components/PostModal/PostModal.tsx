@@ -26,26 +26,27 @@ const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
         }}
       >
         <Paper elevation={8} sx={{ width: '100%', height: '100%' }}>
-          <Box display="flex" overflow="hidden" width="100%" height="100%">
+          <Box display="flex" overflow="auto" width="100%" height="100%">
             {post?.content.imageUrl && (
               <>
-                <Box display="flex" flexGrow="1">
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    width="100%"
-                  >
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  width="30%"
+                  height="100%"
+                >
+                  <Box display="flex" flexDirection="column" flexGrow="1">
                     <Box
                       component="img"
                       src={post?.content.imageUrl}
-                      flexGrow="1"
-                      maxWidth="100%"
-                      sx={{ objectFit: 'contain' }}
+                      width="100%"
+                      height="100%"
+                      sx={{ objectFit: 'scale-down' }}
                     />
-                    <Divider sx={{ width: '100%' }} />
-                    <PostRatingBox rating={post?.content.reviewerRating || 0} />
                   </Box>
+                  <Divider sx={{ width: '100%' }} />
+                  <PostRatingBox rating={post?.content.reviewerRating || 0} />
                 </Box>
                 <Divider orientation="vertical" />
               </>
