@@ -1,10 +1,9 @@
-import { Box, Divider, IconButton, Modal, Paper } from '@mui/material';
+import { Box, Divider, Modal, Paper } from '@mui/material';
 import Post from '../../Types/Post/Post';
-import { Favorite } from '@mui/icons-material';
 import PostCommentBox from './PostCommentBox';
-import StarRating from '../StarRating/StarRating';
 import React from 'react';
 import PostCommentInput from './PostCommentInput';
+import PostRatingBox from './PostRatingBox';
 
 type Props = {
   post?: Post;
@@ -44,30 +43,20 @@ const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
                       maxWidth="100%"
                       sx={{ objectFit: 'contain' }}
                     />
-                    <Box
-                      display="flex"
-                      justifyContent="space-evenly"
-                      alignItems="center"
-                      width="100%"
-                      height="10%"
-                    >
-                      <IconButton aria-label="like">
-                        <Favorite />
-                      </IconButton>
-                      <StarRating rating={post?.content.reviewerRating || 0} />
-                    </Box>
+                    <Divider sx={{ width: '100%' }} />
+                    <PostRatingBox rating={post?.content.reviewerRating || 0} />
                   </Box>
                 </Box>
                 <Divider orientation="vertical" />
               </>
             )}
-            <Box display="flex" flexGrow="1">
+            <Box display="flex" flexDirection="column" flexGrow="1">
               <Box
                 display="flex"
                 flexDirection="column"
+                flexGrow="1"
                 alignItems="center"
                 width="100%"
-                height="100%"
               >
                 {post?.content.title}
                 <Box
@@ -80,6 +69,12 @@ const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
                   {post?.content.body}
                 </Box>
               </Box>
+              {!post?.content.imageUrl && (
+                <>
+                  <Divider />
+                  <PostRatingBox rating={post?.content.reviewerRating || 0} />
+                </>
+              )}
             </Box>
             <Divider orientation="vertical" />
             <Box
