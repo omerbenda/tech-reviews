@@ -105,20 +105,31 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                 minRows={3}
                 inputRef={bodyInputRef}
               />
+              <Divider sx={{ width: '100%' }} />
               <Box
                 display="flex"
                 justifyContent="space-evenly"
                 flexWrap="wrap"
                 gap={1}
                 width="100%"
+                overflow="auto"
               >
                 <TextField
                   label="Image URL"
                   variant="filled"
                   onChange={(e) => setImageUrl(e.target.value)}
                 />
-                {imageUrl && <Box component="img" src={imageUrl} />}
+                {imageUrl && (
+                  <Box
+                    component="img"
+                    src={imageUrl}
+                    width="100%"
+                    height="100%"
+                    sx={{ objectFit: 'scale-down' }}
+                  />
+                )}
               </Box>
+              <Divider sx={{ width: '100%' }} />
               <Box
                 display="flex"
                 flexDirection="column"
