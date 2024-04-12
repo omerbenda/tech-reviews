@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import HomePage from './Pages/HomePage/HomePage';
 import FeedPage from './Pages/FeedPage/FeedPage';
+import ProfilePage from './Pages/ProfilePage/ProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/feed',
     element: <FeedPage />,
+  },
+  {
+    path: '/profile/:userId',
+    element: <ProfilePage />,
   },
 ]);
 

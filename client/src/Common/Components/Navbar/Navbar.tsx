@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   const handleProfileClick = () => {
-    navigate('/profile');
+    navigate(`/profile/${currentUser?.id}`);
   };
 
   return (

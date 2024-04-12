@@ -32,7 +32,9 @@ const api = {
   },
   users: {
     get: async (id: string): Promise<AxiosResponse<User>> => {
-      return axiosInstance.get(`/user/${id}`);
+      return axiosInstance.get(`/user/${id}`, {
+        headers: { Authorization: `Bearer ${document.cookie}` },
+      });
     },
   },
   identity: {
