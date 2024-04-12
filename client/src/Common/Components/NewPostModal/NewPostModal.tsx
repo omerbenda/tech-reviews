@@ -103,6 +103,7 @@ const NewPostModal = ({ isOpen, closeHandler }: Props) => {
                 multiline
                 fullWidth
                 minRows={3}
+                maxRows={6}
                 inputRef={bodyInputRef}
               />
               <Divider sx={{ width: '100%' }} />

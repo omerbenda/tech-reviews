@@ -1,9 +1,18 @@
-import { Box, Divider, Modal, Paper } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Modal,
+  Paper,
+  Typography,
+} from '@mui/material';
 import Post from '../../Types/Post/Post';
 import PostCommentBox from './PostCommentBox';
 import React from 'react';
 import PostCommentInput from './PostCommentInput';
 import PostRatingBox from './PostRatingBox';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   post?: Post;
@@ -13,6 +22,12 @@ type Props = {
 };
 
 const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
+  const navigate = useNavigate();
+
+  const onAuthorProfileClick = () => {
+    navigate(`/profile/${post?.author.id}`);
+  };
+
   return (
     <Modal open={isOpen} onClose={closeHandler}>
       <Box
@@ -26,8 +41,9 @@ const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
         }}
       >
         <Paper elevation={8} sx={{ width: '100%', height: '100%' }}>
-          <Box display="flex" overflow="auto" width="100%" height="100%">
-            {post?.content.imageUrl && (
+          <Box display="flex" width="100%" height="100%">
+            {post?.content
+              .imageUrl /* todo Make this responsive for mobile */ && (
               <>
                 <Box
                   display="flex"
@@ -51,23 +67,58 @@ const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
                 <Divider orientation="vertical" />
               </>
             )}
-            <Box display="flex" flexDirection="column" flexGrow="1">
+            <Box
+              display="flex"
+              flexDirection="column"
+              flexGrow="1"
+              overflow="hidden"
+            >
               <Box
                 display="flex"
                 flexDirection="column"
                 flexGrow="1"
                 alignItems="center"
+                overflow="hidden"
                 width="100%"
+                gap={2}
               >
-                {post?.content.title}
+                <Box />
+                <Button
+                  onClick={onAuthorProfileClick}
+                  variant="text"
+                  size="large"
+                >
+                  <Box display="flex" alignItems="center" gap={2}>
+                    <Avatar src={post?.author.imageUrl} />
+                    <Typography variant="h6">
+                      {post?.author.username}
+                    </Typography>
+                  </Box>
+                </Button>
+                <Divider sx={{ width: '100%' }} />
+                <Box
+                  display="flex"
+                  justifyContent="space-evenly"
+                  alignItems="center"
+                  overflow="auto"
+                  width="100%"
+                  minHeight="15%"
+                >
+                  <Typography variant="h6" textAlign="center">
+                    {post?.content.title}
+                  </Typography>
+                </Box>
+                <Divider sx={{ width: '100%' }} />
                 <Box
                   display="flex"
                   flexDirection="column"
-                  alignItems="center"
+                  overflow="auto"
+                  flexGrow="1"
                   width="90%"
-                  height="100%"
                 >
-                  {post?.content.body}
+                  <Typography variant="body2" textAlign="center">
+                    {post?.content.body}
+                  </Typography>
                 </Box>
               </Box>
               {!post?.content.imageUrl && (
