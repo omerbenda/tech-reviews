@@ -11,6 +11,7 @@ import api from '../../../../Api/Api';
 import { useGeneralStore } from '../../../../Stores/GeneralStore';
 import { useNavigate } from 'react-router-dom';
 import User from '../../../../Common/Types/User/User';
+import { useCookies } from 'react-cookie';
 
 type Props = {
   isOpen: boolean;
@@ -20,6 +21,8 @@ type Props = {
 const RegisterModal = ({ isOpen, closeHandler }: Props) => {
   const [imageUrl, setImageUrl] = useState<string>('');
   const usernameInputRef = useRef<HTMLInputElement>();
+
+  const [, setCookie] = useCookies(['token']);
 
   const setUser: (user: User) => void = useGeneralStore(
     (state) => state.setCurrentUser
@@ -36,8 +39,8 @@ const RegisterModal = ({ isOpen, closeHandler }: Props) => {
         })
       ).data;
 
-      document.cookie = `${token}`; // todo change this
-
+      setCookie('token', `${token}`);
+      
       setUser((await api.identity.getSelf()).data);
       navigate('/feed');
     }

@@ -4,10 +4,13 @@ import router from './Router';
 import { useGeneralStore } from './Stores/GeneralStore';
 import api from './Api/Api';
 import ThemeController from './Common/Components/ThemeController/ThemeController';
+import { useCookies } from 'react-cookie';
 
 const App = () => {
   const currentUser = useGeneralStore((state) => state.currentUser);
   const setCurrentUser = useGeneralStore((state) => state.setCurrentUser);
+
+  const [cookies] = useCookies(['token']);
 
   const setUserFromToken: () => Promise<void> = useCallback(async () => {
     return setCurrentUser((await api.identity.getSelf()).data);
@@ -15,7 +18,7 @@ const App = () => {
 
   const checkUserExists = useCallback(async () => {
     if (!currentUser) {
-      if (document.cookie) {
+      if (cookies.token) {
         try {
           await setUserFromToken();
           router.navigate('/feed');
@@ -24,7 +27,7 @@ const App = () => {
         }
       }
     }
-  }, [currentUser, setUserFromToken]);
+  }, [currentUser, setUserFromToken, cookies]);
 
   useEffect(() => {
     checkUserExists();

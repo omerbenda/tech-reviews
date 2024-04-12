@@ -7,10 +7,13 @@ import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
 import RegisterModal from './Components/RegisterModal/RegisterModal';
 import LoginResponse from '../../Common/Types/Identity/LoginResponse';
+import { useCookies } from 'react-cookie';
 
 const HomePage = () => {
   const [registerModalOpen, setRegisterModalOpen] = useState<boolean>(false);
   const usernameInputRef = useRef<HTMLInputElement>();
+
+  const [, setCookie] = useCookies(['token']);
 
   const setCurrentUser: (user: User) => void = useGeneralStore(
     (state) => state.setCurrentUser
@@ -26,7 +29,7 @@ const HomePage = () => {
         })
       ).data;
 
-      document.cookie = `${loginResponse.token}`; // todo fix this to use token={token};
+      setCookie('token', `${loginResponse.token}`);
       setCurrentUser(loginResponse.user);
       navigate('/feed');
     }

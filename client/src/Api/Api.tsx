@@ -7,33 +7,36 @@ import User from '../Common/Types/User/User';
 import LoginParams from '../Common/Types/User/LoginParams';
 import LoginResponse from '../Common/Types/Identity/LoginResponse';
 import NewPostComment from '../Common/Types/Post/NewPostComment';
+import { Cookies } from 'react-cookie';
 
-// todo find how to add token to necessary requests
+const getToken: () => string = () => new Cookies().get('token');
+
+const getAuth: () => string = () => `Bearer ${getToken()}`;
 
 const api = {
   posts: {
     get: async (): Promise<AxiosResponse<Post[]>> => {
       return axiosInstance.get('/post', {
-        headers: { Authorization: `Bearer ${document.cookie}` },
+        headers: { Authorization: getAuth() },
       });
     },
     add: async (post: NewPost): Promise<AxiosResponse<Post>> => {
       return axiosInstance.post('/post', post, {
-        headers: { Authorization: `Bearer ${document.cookie}` },
+        headers: { Authorization: getAuth() },
       });
     },
     addComment: async (
       comment: NewPostComment
     ): Promise<AxiosResponse<Post>> => {
       return axiosInstance.post('/post/comment', comment, {
-        headers: { Authorization: `Bearer ${document.cookie}` },
+        headers: { Authorization: getAuth() },
       });
     },
   },
   users: {
     get: async (id: string): Promise<AxiosResponse<User>> => {
       return axiosInstance.get(`/user/${id}`, {
-        headers: { Authorization: `Bearer ${document.cookie}` },
+        headers: { Authorization: getAuth() },
       });
     },
   },
@@ -48,7 +51,7 @@ const api = {
     },
     getSelf: async (): Promise<AxiosResponse<User>> => {
       return axiosInstance.get(`/identity/user`, {
-        headers: { Authorization: `Bearer ${document.cookie}` },
+        headers: { Authorization: getAuth() },
       });
     },
   },
