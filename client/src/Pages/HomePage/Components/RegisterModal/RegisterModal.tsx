@@ -32,6 +32,7 @@ const RegisterModal = ({ isOpen, closeHandler }: Props) => {
       const token: string = (
         await api.identity.register({
           username: usernameInputRef.current.value,
+          imageUrl,
         })
       ).data;
 

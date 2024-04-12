@@ -6,11 +6,13 @@ namespace tech_reviews.DTO
     public class NewUserDTO
     {
         public string Username { get; set; }
+        public string ImageUrl { get; set; }
 
         [JsonConstructor]
-        public NewUserDTO(string username)
+        public NewUserDTO(string username, string imageUrl)
         {
             Username = username;
+            ImageUrl = imageUrl;
         }
     }
 }

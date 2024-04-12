@@ -34,7 +34,7 @@ namespace tech_reviews.BL
 
         public string Register(NewUserDTO newUser)
         {
-            User user = new User(Guid.NewGuid(), newUser.Username);
+            User user = new User(Guid.NewGuid(), newUser.Username, newUser.ImageUrl);
             _userDAL.AddUser(user);
 
             return GenerateToken(user);

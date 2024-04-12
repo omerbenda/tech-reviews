@@ -10,13 +10,15 @@ const Sidebar = ({ users }: Props) => {
     <Box
       display="flex"
       flexDirection="column"
-      width="10%"
+      width="100%"
       height="100%"
       sx={{ overflowY: 'auto' }}
     >
       <Typography variant="h5">Users:</Typography>
       {users.map((user) => (
-        <Typography variant="h6" key={user.id}>* {user.username}</Typography>
+        <Typography variant="h6" key={user.id}>
+          * {user.username}
+        </Typography>
       ))}
     </Box>
   );

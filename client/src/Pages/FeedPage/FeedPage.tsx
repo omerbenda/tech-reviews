@@ -59,7 +59,9 @@ const FeedPage = () => {
           gap="10px"
           height="100%"
         >
-          <Sidebar users={currentUser ? [currentUser] : []} />
+          <Box width="10%">
+            <Sidebar users={currentUser ? [currentUser] : []} />
+          </Box>
           <Divider orientation="vertical" />
           <PostList posts={posts} onPostOpen={postClickHandler} />
         </Box>
