@@ -16,7 +16,11 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleTitleClick = () => {
-    navigate('/'); // todo remove
+    if (currentUser) {
+      navigate('/feed');
+    } else {
+      navigate('/');
+    }
   };
 
   const handleProfileClick = () => {

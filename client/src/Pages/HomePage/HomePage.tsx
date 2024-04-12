@@ -1,7 +1,7 @@
 import { Box, Button, TextField } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import api from '../../Api/Api';
 import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
@@ -15,6 +15,9 @@ const HomePage = () => {
 
   const [, setCookie] = useCookies(['token']);
 
+  const currentUser: User | undefined = useGeneralStore(
+    (state) => state.currentUser
+  );
   const setCurrentUser: (user: User) => void = useGeneralStore(
     (state) => state.setCurrentUser
   );
@@ -34,6 +37,12 @@ const HomePage = () => {
       navigate('/feed');
     }
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/feed');
+    }
+  }, [currentUser, navigate]);
 
   return (
     <Box display="flex" flexDirection="column" height="100%">

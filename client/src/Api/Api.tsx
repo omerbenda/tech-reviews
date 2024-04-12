@@ -20,6 +20,11 @@ const api = {
         headers: { Authorization: getAuth() },
       });
     },
+    getByUser: async (userId: string): Promise<AxiosResponse<Post[]>> => {
+      return axiosInstance.get(`/post/by/${userId}`, {
+        headers: { Authorization: getAuth() },
+      });
+    },
     add: async (post: NewPost): Promise<AxiosResponse<Post>> => {
       return axiosInstance.post('/post', post, {
         headers: { Authorization: getAuth() },

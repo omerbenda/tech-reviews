@@ -21,7 +21,6 @@ const App = () => {
       if (cookies.token) {
         try {
           await setUserFromToken();
-          router.navigate('/feed');
         } catch (e) {
           router.navigate('/');
         }

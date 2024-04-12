@@ -22,6 +22,11 @@ namespace tech_reviews.BL
             return _postDAL.GetPosts();
         }
 
+        public List<Post> GetPostsByUser(Guid userId)
+        {
+            return _postDAL.GetPostsByUser(userId);
+        }
+
         public Post AddPostByUser(NewPostDTO newPost, ClaimsPrincipal claimsUser)
         {
             string idClaim = IdentityBL.GetIdFromToken(claimsUser);

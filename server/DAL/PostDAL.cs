@@ -11,6 +11,11 @@ namespace tech_reviews.DAL
             return DataManager.Posts;
         }
 
+        public List<Post> GetPostsByUser(Guid userId)
+        {
+            return DataManager.Posts.Where(post => post.Author.Id.Equals(userId)).ToList();
+        }
+
         public void AddPost(Post post)
         {
             DataManager.Posts.Add(post);
@@ -31,7 +36,7 @@ namespace tech_reviews.DAL
             }
 
             post.Comments.Add(comment);
-            
+
             return post;
         }
     }

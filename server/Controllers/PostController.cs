@@ -24,6 +24,12 @@ namespace tech_reviews.Controllers
             return _postBL.GetPosts();
         }
 
+        [HttpGet("by/{userId:guid}")]
+        public ActionResult<List<Post>> GetPostsByUser(Guid userId)
+        {
+            return _postBL.GetPostsByUser(userId);
+        }
+
         [HttpPost]
         public ActionResult<Post> AddPost([FromBody] NewPostDTO post)
         {
