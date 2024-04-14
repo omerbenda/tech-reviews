@@ -1,4 +1,4 @@
-import { Box, Divider, Fab } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import Post from '../../Common/Types/Post/Post';
 import PostList from '../../Common/Components/PostList/PostList';
@@ -6,10 +6,10 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import PostModal from '../../Common/Components/PostModal/PostModal';
 import { useEffect, useState } from 'react';
 import api from '../../Api/Api';
-import { Add } from '@mui/icons-material';
-import NewPostModal from '../../Common/Components/NewPostModal/NewPostModal';
+import NewPostModal from '../../Common/Components/NewPost/NewPostModal/NewPostModal';
 import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
+import NewPostFab from '../../Common/Components/NewPost/NewPostFab/NewPostFab';
 
 const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]); // TODO: switch to post headers here
@@ -30,10 +30,6 @@ const FeedPage = () => {
   const postClickHandler = (post: Post) => {
     setPostModalOpen(true);
     setModalPost(post);
-  };
-
-  const newPostButtonHandler = () => {
-    setNewPostModalOpen(true);
   };
 
   const updatePost = (updatedPost: Post): void => {
@@ -76,11 +72,7 @@ const FeedPage = () => {
         isOpen={isNewPostModalOpen}
         closeHandler={() => setNewPostModalOpen(false)}
       />
-      <Box position="fixed" right="4%" bottom="4%">
-        <Fab color="primary" onClick={newPostButtonHandler}>
-          <Add />
-        </Fab>
-      </Box>
+      <NewPostFab onClick={() => setNewPostModalOpen(true)} />
     </Box>
   );
 };

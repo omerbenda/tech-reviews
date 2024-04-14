@@ -8,11 +8,11 @@ import {
   Typography,
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import StarRating from '../StarRating/StarRating';
-import NewPost from '../../Types/Post/NewPost';
-import api from '../../../Api/Api';
-import { useGeneralStore } from '../../../Stores/GeneralStore';
-import User from '../../Types/User/User';
+import StarRating from '../../StarRating/StarRating';
+import NewPost from '../../../Types/Post/NewPost';
+import api from '../../../../Api/Api';
+import { useGeneralStore } from '../../../../Stores/GeneralStore';
+import User from '../../../Types/User/User';
 
 type Props = {
   isOpen: boolean;

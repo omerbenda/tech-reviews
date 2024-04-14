@@ -7,12 +7,15 @@ import Navbar from '../../Common/Components/Navbar/Navbar';
 import PostList from '../../Common/Components/PostList/PostList';
 import Post from '../../Common/Types/Post/Post';
 import PostModal from '../../Common/Components/PostModal/PostModal';
+import NewPostFab from '../../Common/Components/NewPost/NewPostFab/NewPostFab';
+import NewPostModal from '../../Common/Components/NewPost/NewPostModal/NewPostModal';
 
 const ProfilePage = () => {
   const [profileUser, setProfileUser] = useState<User>();
   const [userPosts, setUserPosts] = useState<Post[]>([]);
   const [postModaOpen, setPostModalOpen] = useState<boolean>(false);
   const [modalPost, setModalPost] = useState<Post>();
+  const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
 
   const { userId } = useParams();
 
@@ -88,6 +91,11 @@ const ProfilePage = () => {
         post={modalPost}
         updatePost={updatePost}
       />
+      <NewPostModal
+        isOpen={isNewPostModalOpen}
+        closeHandler={() => setNewPostModalOpen(false)}
+      />
+      <NewPostFab onClick={() => setNewPostModalOpen(true)} />
     </Box>
   );
 };
