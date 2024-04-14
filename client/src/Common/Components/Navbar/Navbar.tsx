@@ -1,14 +1,7 @@
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Container,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useGeneralStore } from '../../../Stores/GeneralStore';
+import NavbarUserActions from './NavbarUserActions';
 
 const Navbar = () => {
   const currentUser = useGeneralStore((state) => state.currentUser);
@@ -21,10 +14,6 @@ const Navbar = () => {
     } else {
       navigate('/');
     }
-  };
-
-  const handleProfileClick = () => {
-    navigate(`/profile/${currentUser?.id}`);
   };
 
   return (
@@ -41,13 +30,7 @@ const Navbar = () => {
             Tech Reviews
           </Typography>
           <Box flexGrow="1" />
-          {currentUser && (
-            <Box flexGrow="0">
-              <IconButton onClick={handleProfileClick}>
-                <Avatar alt="Profile" src={currentUser.imageUrl} />
-              </IconButton>
-            </Box>
-          )}
+          {currentUser && <NavbarUserActions currentUser={currentUser} />}
         </Toolbar>
       </Container>
     </AppBar>
