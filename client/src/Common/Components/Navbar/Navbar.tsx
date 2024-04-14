@@ -30,7 +30,7 @@ const Navbar = () => {
             Tech Reviews
           </Typography>
           <Box flexGrow="1" />
-          {currentUser && <NavbarUserActions currentUser={currentUser} />}
+          {currentUser && <NavbarUserActions user={currentUser} />}
         </Toolbar>
       </Container>
     </AppBar>

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import {
   Box,
   Button,
+  Divider,
   Modal,
   Paper,
   TextField,
@@ -40,7 +41,7 @@ const RegisterModal = ({ isOpen, closeHandler }: Props) => {
       ).data;
 
       setCookie('token', `${token}`);
-      
+
       setUser((await api.identity.getSelf()).data);
       navigate('/feed');
     }
@@ -80,7 +81,8 @@ const RegisterModal = ({ isOpen, closeHandler }: Props) => {
               flexGrow="1"
               justifyContent="center"
               alignItems="center"
-              gap={3}
+              overflow="hidden"
+              gap={2}
               width="100%"
             >
               <TextField
@@ -88,23 +90,35 @@ const RegisterModal = ({ isOpen, closeHandler }: Props) => {
                 variant="filled"
                 inputRef={usernameInputRef}
               />
+              <Divider sx={{ width: '100%' }} />
               <Box
                 display="flex"
                 justifyContent="space-evenly"
                 flexWrap="wrap"
+                flexGrow="1"
                 gap={1}
                 width="100%"
+                overflow="auto"
               >
                 <TextField
                   label="Image URL"
                   variant="filled"
                   onChange={(e) => setImageUrl(e.target.value)}
                 />
-                {imageUrl && <Box component="img" src={imageUrl} />}
+                {imageUrl && (
+                  <Box
+                    component="img"
+                    src={imageUrl}
+                    width="75%"
+                    sx={{ objectFit: 'fit' }}
+                  />
+                )}
               </Box>
+              <Divider sx={{ width: '100%' }} />
               <Button variant="contained" onClick={register}>
                 Register
               </Button>
+              <Box />
             </Box>
           </Box>
         </Paper>

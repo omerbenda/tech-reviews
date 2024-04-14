@@ -7,10 +7,10 @@ import { useGeneralStore } from '../../../Stores/GeneralStore';
 import { useCookies } from 'react-cookie';
 
 type Props = {
-  currentUser?: User;
+  user?: User;
 };
 
-const NavbarUserActions = ({ currentUser }: Props) => {
+const NavbarUserActions = ({ user }: Props) => {
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement>();
 
   const setCurrentUser = useGeneralStore((state) => state.setCurrentUser);
@@ -23,7 +23,7 @@ const NavbarUserActions = ({ currentUser }: Props) => {
   };
 
   const handleProfileClick = () => {
-    navigate(`/profile/${currentUser?.id}`);
+    navigate(`/profile/${user?.id}`);
   };
 
   const logout = () => {
@@ -47,7 +47,7 @@ const NavbarUserActions = ({ currentUser }: Props) => {
         </Menu>
       </Box>
       <IconButton onClick={handleProfileClick}>
-        <Avatar alt="Profile" src={currentUser?.imageUrl} />
+        <Avatar alt="Profile" src={user?.imageUrl} />
       </IconButton>
     </Box>
   );
