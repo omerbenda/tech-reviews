@@ -20,9 +20,10 @@ import StarRating from '../StarRating/StarRating';
 type Props = {
   post: Post;
   onPostOpen: (post: Post) => void;
+  onProfileClick: (userId: string) => void;
 };
 
-const PostCard = ({ post, onPostOpen }: Props) => {
+const PostCard = ({ post, onPostOpen, onProfileClick }: Props) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
 
   return (
@@ -31,6 +32,8 @@ const PostCard = ({ post, onPostOpen }: Props) => {
         <CardHeader
           avatar={<Avatar src={post.author.imageUrl} />}
           title={<Typography variant="h6">{post.author.username}</Typography>}
+          component={Button}
+          onClick={() => onProfileClick(post.author.id)}
         />
         {post.content.imageUrl && (
           <>

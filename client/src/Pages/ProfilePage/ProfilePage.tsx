@@ -1,5 +1,5 @@
 import { Avatar, Box, Divider, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import User from '../../Common/Types/User/User';
 import { useEffect, useState } from 'react';
 import api from '../../Api/Api';
@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
 
   const { userId } = useParams();
+  const navigate = useNavigate();
 
   const fetchProfileUser = async (userId: string) => {
     setProfileUser((await api.users.get(userId)).data);
@@ -37,6 +38,10 @@ const ProfilePage = () => {
   const postClickHandler = (post: Post) => {
     setPostModalOpen(true);
     setModalPost(post);
+  };
+
+  const profileClickHandler = (userId: string) => {
+    navigate(`/profile/${userId}`);
   };
 
   const updatePost = (updatedPost: Post): void => {
@@ -82,7 +87,11 @@ const ProfilePage = () => {
             </Box>
           </Box>
           <Divider sx={{ width: '100%' }} />
-          <PostList posts={userPosts} onPostOpen={postClickHandler} />
+          <PostList
+            posts={userPosts}
+            onPostOpen={postClickHandler}
+            onProfileClick={profileClickHandler}
+          />
         </Box>
       </Box>
       <PostModal

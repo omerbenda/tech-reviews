@@ -10,12 +10,15 @@ import NewPostModal from '../../Common/Components/NewPost/NewPostModal/NewPostMo
 import { useGeneralStore } from '../../Stores/GeneralStore';
 import User from '../../Common/Types/User/User';
 import NewPostFab from '../../Common/Components/NewPost/NewPostFab/NewPostFab';
+import { useNavigate } from 'react-router-dom';
 
 const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]); // TODO: switch to post headers here
   const [isPostModalOpen, setPostModalOpen] = useState<boolean>(false);
   const [modalPost, setModalPost] = useState<Post>();
   const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const currentUser: User | undefined = useGeneralStore(
     (state) => state.currentUser
@@ -30,6 +33,10 @@ const FeedPage = () => {
   const postClickHandler = (post: Post) => {
     setPostModalOpen(true);
     setModalPost(post);
+  };
+
+  const profileClickHandler = (userId: string) => {
+    navigate(`/profile/${userId}`);
   };
 
   const updatePost = (updatedPost: Post): void => {
@@ -59,7 +66,11 @@ const FeedPage = () => {
             <Sidebar users={currentUser ? [currentUser] : []} />
           </Box>
           <Divider orientation="vertical" />
-          <PostList posts={posts} onPostOpen={postClickHandler} />
+          <PostList
+            posts={posts}
+            onPostOpen={postClickHandler}
+            onProfileClick={profileClickHandler}
+          />
         </Box>
       </Box>
       <PostModal

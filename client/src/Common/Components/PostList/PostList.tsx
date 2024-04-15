@@ -5,9 +5,10 @@ import Post from '../../Types/Post/Post';
 type Props = {
   posts: Post[];
   onPostOpen: (post: Post) => void;
+  onProfileClick: (userId: string) => void;
 };
 
-const PostList = ({ posts, onPostOpen }: Props) => {
+const PostList = ({ posts, onPostOpen, onProfileClick }: Props) => {
   return (
     <Box
       display="flex"
@@ -24,7 +25,12 @@ const PostList = ({ posts, onPostOpen }: Props) => {
         gap="5%"
       >
         {posts.map((post: Post) => (
-          <PostCard post={post} onPostOpen={onPostOpen} key={post.id} />
+          <PostCard
+            post={post}
+            onPostOpen={onPostOpen}
+            onProfileClick={onProfileClick}
+            key={post.id}
+          />
         ))}
       </Box>
     </Box>
