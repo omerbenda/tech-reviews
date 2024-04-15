@@ -19,9 +19,16 @@ type Props = {
   isOpen: boolean;
   closeHandler: () => void;
   updatePost: (updatedPost: Post) => void;
+  onCommentProfileClick: (userId: string) => void;
 };
 
-const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
+const PostModal = ({
+  post,
+  isOpen,
+  closeHandler,
+  updatePost,
+  onCommentProfileClick,
+}: Props) => {
   const navigate = useNavigate();
 
   const onAuthorProfileClick = () => {
@@ -137,7 +144,10 @@ const PostModal = ({ post, isOpen, closeHandler, updatePost }: Props) => {
             >
               {post?.comments.map((comment) => (
                 <React.Fragment key={comment.id}>
-                  <PostCommentBox comment={comment} />
+                  <PostCommentBox
+                    comment={comment}
+                    onProfileClick={onCommentProfileClick}
+                  />
                   <Divider sx={{ width: '90%' }} />
                 </React.Fragment>
               ))}

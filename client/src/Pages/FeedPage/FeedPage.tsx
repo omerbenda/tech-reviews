@@ -36,6 +36,7 @@ const FeedPage = () => {
   };
 
   const profileClickHandler = (userId: string) => {
+    setPostModalOpen(false);
     navigate(`/profile/${userId}`);
   };
 
@@ -78,6 +79,7 @@ const FeedPage = () => {
         closeHandler={() => setPostModalOpen(false)}
         post={modalPost}
         updatePost={updatePost}
+        onCommentProfileClick={profileClickHandler}
       />
       <NewPostModal
         isOpen={isNewPostModalOpen}
