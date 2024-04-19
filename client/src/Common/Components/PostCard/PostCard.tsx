@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import Post from '../../Types/Post/Post';
-import { Comment, Favorite } from '@mui/icons-material';
+import { Comment } from '@mui/icons-material';
 import { useState } from 'react';
 import StarRating from '../StarRating/StarRating';
 
@@ -57,9 +57,6 @@ const PostCard = ({ post, onPostOpen, onProfileClick }: Props) => {
         </Typography>
         <Divider sx={{ mx: 2 }} />
         <CardActions disableSpacing>
-          <IconButton aria-label="like">
-            <Favorite />
-          </IconButton>
           <IconButton aria-label="comments" onClick={() => onPostOpen(post)}>
             <Comment />
           </IconButton>

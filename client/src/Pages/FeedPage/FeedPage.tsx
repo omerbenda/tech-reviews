@@ -1,14 +1,11 @@
-import { Box, Divider } from '@mui/material';
+import { Box } from '@mui/material';
 import Navbar from '../../Common/Components/Navbar/Navbar';
 import Post from '../../Common/Types/Post/Post';
 import PostList from '../../Common/Components/PostList/PostList';
-import Sidebar from './Components/Sidebar/Sidebar';
 import PostModal from '../../Common/Components/PostModal/PostModal';
 import { useEffect, useState } from 'react';
 import api from '../../Api/Api';
 import NewPostModal from '../../Common/Components/NewPost/NewPostModal/NewPostModal';
-import { useGeneralStore } from '../../Stores/GeneralStore';
-import User from '../../Common/Types/User/User';
 import NewPostFab from '../../Common/Components/NewPost/NewPostFab/NewPostFab';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +16,6 @@ const FeedPage = () => {
   const [isNewPostModalOpen, setNewPostModalOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
-  const currentUser: User | undefined = useGeneralStore(
-    (state) => state.currentUser
-  );
 
   useEffect(() => {
     (async () => {
@@ -63,10 +56,6 @@ const FeedPage = () => {
           gap="10px"
           height="100%"
         >
-          <Box width="10%">
-            <Sidebar users={currentUser ? [currentUser] : []} />
-          </Box>
-          <Divider orientation="vertical" />
           <PostList
             posts={posts}
             onPostOpen={postClickHandler}
