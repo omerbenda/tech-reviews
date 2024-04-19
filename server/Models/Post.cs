@@ -6,6 +6,7 @@
         public User Author { get; set; }
         public PostContent Content { get; set; }
         public List<PostComment> Comments { get; set; }
+        public DateTime CreationTime { get; set; }
 
         public Post(Guid id, User author, PostContent content)
             : this(id, author, content, new List<PostComment>()) { }
@@ -16,6 +17,7 @@
             Author = author;
             Content = content;
             Comments = comments;
+            CreationTime = DateTime.Now;
         }
     }
 }

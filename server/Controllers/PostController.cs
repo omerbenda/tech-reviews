@@ -21,7 +21,7 @@ namespace tech_reviews.Controllers
         [HttpGet]
         public ActionResult<List<Post>> Get()
         {
-            return _postBL.GetPosts();
+            return _postBL.GetPostsByDate();
         }
 
         [HttpGet("by/{userId:guid}")]

@@ -17,14 +17,14 @@ namespace tech_reviews.BL
             _userDAL = userDAL;
         }
 
-        public List<Post> GetPosts()
+        public List<Post> GetPostsByDate()
         {
-            return _postDAL.GetPosts();
+            return _postDAL.GetPostByDateDesc().ToList();
         }
 
         public List<Post> GetPostsByUser(Guid userId)
         {
-            return _postDAL.GetPostsByUser(userId);
+            return _postDAL.GetPostsByUser(userId).ToList();
         }
 
         public Post AddPostByUser(NewPostDTO newPost, ClaimsPrincipal claimsUser)

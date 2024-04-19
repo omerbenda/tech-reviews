@@ -11,9 +11,14 @@ namespace tech_reviews.DAL
             return DataManager.Posts;
         }
 
-        public List<Post> GetPostsByUser(Guid userId)
+        public IOrderedEnumerable<Post> GetPostByDateDesc()
         {
-            return DataManager.Posts.Where(post => post.Author.Id.Equals(userId)).ToList();
+            return SortPostsByDate(DataManager.Posts);
+        }
+
+        public IOrderedEnumerable<Post> GetPostsByUser(Guid userId)
+        {
+            return SortPostsByDate(DataManager.Posts.Where(post => post.Author.Id.Equals(userId)).ToList());
         }
 
         public void AddPost(Post post)
@@ -38,6 +43,14 @@ namespace tech_reviews.DAL
             post.Comments.Add(comment);
 
             return post;
+        }
+
+        private static IOrderedEnumerable<Post> SortPostsByDate(IEnumerable<Post> posts)
+        {
+            return
+                from post in posts
+                orderby post.CreationTime descending
+                select post;
         }
     }
 }
