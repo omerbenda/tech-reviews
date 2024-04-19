@@ -63,9 +63,9 @@ const PostCard = ({ post, onPostOpen, onProfileClick }: Props) => {
           <Box display="flex" flexGrow="1" />
           <StarRating rating={post.content.reviewerRating} />
         </CardActions>
-        <Divider sx={{ mx: 2 }} />
         {post.content.body && (
           <>
+            <Divider sx={{ mx: 2 }} />
             <CardContent>
               <Box
                 display="flex"
