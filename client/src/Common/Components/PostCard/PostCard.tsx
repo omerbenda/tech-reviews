@@ -13,16 +13,17 @@ import {
   Typography,
 } from '@mui/material';
 import Post from '../../Types/Post/Post';
-import { Comment, Favorite } from '@mui/icons-material';
-import StarRating from '../StarRating/StarRating';
+import { Comment } from '@mui/icons-material';
 import { useState } from 'react';
+import StarRating from '../StarRating/StarRating';
 
 type Props = {
   post: Post;
   onPostOpen: (post: Post) => void;
+  onProfileClick: (userId: string) => void;
 };
 
-const PostCard = ({ post, onPostOpen }: Props) => {
+const PostCard = ({ post, onPostOpen, onProfileClick }: Props) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
 
   return (
@@ -31,6 +32,8 @@ const PostCard = ({ post, onPostOpen }: Props) => {
         <CardHeader
           avatar={<Avatar src={post.author.imageUrl} />}
           title={<Typography variant="h6">{post.author.username}</Typography>}
+          component={Button}
+          onClick={() => onProfileClick(post.author.id)}
         />
         {post.content.imageUrl && (
           <>
@@ -54,46 +57,47 @@ const PostCard = ({ post, onPostOpen }: Props) => {
         </Typography>
         <Divider sx={{ mx: 2 }} />
         <CardActions disableSpacing>
-          <IconButton aria-label="like">
-            <Favorite />
-          </IconButton>
           <IconButton aria-label="comments" onClick={() => onPostOpen(post)}>
             <Comment />
           </IconButton>
           <Box display="flex" flexGrow="1" />
           <StarRating rating={post.content.reviewerRating} />
         </CardActions>
-        <Divider sx={{ mx: 2 }} />
-        <CardContent>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            gap={2}
-          >
-            <Button
-              variant="text"
-              size="small"
-              onClick={() => setExpanded((currVal) => !currVal)}
-              sx={{ color: 'gray' }}
-            >
-              {isExpanded ? 'Less' : 'More'}
-            </Button>
-          </Box>
-        </CardContent>
-        <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-          <Divider sx={{ mx: 2 }} />
-          <CardContent>
-            <Typography
-              variant="body2"
-              textAlign="center"
-              overflow="hidden"
-              textOverflow="ellipsis"
-            >
-              {post.content.body}
-            </Typography>
-          </CardContent>
-        </Collapse>
+        {post.content.body && (
+          <>
+            <Divider sx={{ mx: 2 }} />
+            <CardContent>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                gap={2}
+              >
+                <Button
+                  variant="text"
+                  size="small"
+                  onClick={() => setExpanded((currVal) => !currVal)}
+                  sx={{ color: 'gray' }}
+                >
+                  {isExpanded ? 'Less' : 'More'}
+                </Button>
+              </Box>
+            </CardContent>
+            <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+              <Divider sx={{ mx: 2 }} />
+              <CardContent>
+                <Typography
+                  variant="body2"
+                  textAlign="center"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                >
+                  {post.content.body}
+                </Typography>
+              </CardContent>
+            </Collapse>
+          </>
+        )}
       </Card>
     </Box>
   );

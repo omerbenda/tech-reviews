@@ -5,16 +5,16 @@ import Post from '../../Types/Post/Post';
 type Props = {
   posts: Post[];
   onPostOpen: (post: Post) => void;
+  onProfileClick: (userId: string) => void;
 };
 
-const PostList = ({ posts, onPostOpen }: Props) => {
+const PostList = ({ posts, onPostOpen, onProfileClick }: Props) => {
   return (
     <Box
       display="flex"
       flexDirection="column"
       width="100%"
       height="100%"
-      p={1}
       sx={{ overflowY: 'auto' }}
     >
       <Box
@@ -25,7 +25,12 @@ const PostList = ({ posts, onPostOpen }: Props) => {
         gap="5%"
       >
         {posts.map((post: Post) => (
-          <PostCard post={post} onPostOpen={onPostOpen} />
+          <PostCard
+            post={post}
+            onPostOpen={onPostOpen}
+            onProfileClick={onProfileClick}
+            key={post.id}
+          />
         ))}
       </Box>
     </Box>

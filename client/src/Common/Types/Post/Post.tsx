@@ -7,6 +7,7 @@ type Post = {
   author: User;
   content: PostContent;
   comments: PostComment[];
+  creationTime: Date;
 };
 
 export default Post;
